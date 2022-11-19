@@ -1,4 +1,4 @@
-import MoviesAndShows from "./pages/moviesAndShows/moviesAndShows";
+import MoviesAndShowsInstance, { MoviesAndShows } from "./pages/moviesAndShows/moviesAndShows";
 import Home from "./pages/home/home";
 import { Page } from "./pages/page.interface";
 import { HOME, MOVIES, ON_BOARDING, ON_BOARDING_PROFILE, SHOWS } from "./pages/pagesConstants";
@@ -15,7 +15,7 @@ export class Router {
 
     private constructor() {
         // init pages
-        this.moviesAndShows = new MoviesAndShows();
+        this.moviesAndShows = MoviesAndShowsInstance();
         this.home = new Home();
 
         this.pages = [

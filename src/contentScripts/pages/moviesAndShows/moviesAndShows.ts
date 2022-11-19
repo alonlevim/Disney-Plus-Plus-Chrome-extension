@@ -6,14 +6,19 @@ import { MOVIES, SHOWS } from "../pagesConstants";
 
 const PATH_DOUBLE_CLICK = "#__next > div:nth-child(3) > div > div:nth-child(1) > div:nth-child(1) > div";
 
-class MoviesAndShows implements Page {
+export class MoviesAndShows implements Page {
+    private static _instance: MoviesAndShows;
     private setupDoubleClickListener = false;
+
+    public static get Instance(): MoviesAndShows {
+        return this._instance || (this._instance = new this());
+    }
 
     public init = (): void => {
         log('init MoviesAndShows');
     }
 
-    public onLoadMoviesOrShowsUIWatch = () => {
+    public update = () => {
         try {
             const pageAndCountry = getPageAndCountry();
 
@@ -36,7 +41,6 @@ class MoviesAndShows implements Page {
 
     private handleDoubleClickInMoviesOrShows(): void {
         try {
-            // TODO: Check why not working
             (document.querySelector(".pr-0") as HTMLDivElement)?.click();
         } catch (error) {
             catchError(error);
@@ -81,4 +85,4 @@ class MoviesAndShows implements Page {
     }
 }
 
-export default MoviesAndShows;
+export default () => MoviesAndShows.Instance;
