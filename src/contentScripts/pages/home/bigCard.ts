@@ -8,7 +8,7 @@ class BigCard {
 
     private canWatch = false;
     private watching = false;
-    private lastTitle = "null";
+    private currentTitle = "null";
     private _isOpen = false;
     private trailers = trailers();
 
@@ -30,18 +30,19 @@ class BigCard {
         }
 
         // find cards in HTML
-        const cards = Object.values(document.getElementsByClassName(BIG_CARD_CLASS));
-        
-        if( !cards.length && this.watching ) {
-            this.handleClose();
-        } else if( cards.length > 0 && !this.watching ) {
+        const cards = Object.values(document.getElementsByClassName(BIG_CARD_CLASS)) as HTMLDivElement[];
+        const card = this.lastCard(cards);
+
+        if (!card && this.watching) {
+            this.handleClose(card);
+        } else if (card && !this.watching) {
             const title = this.getTitleFromCard();
 
-            if( title !== this.lastTitle ) {
-                this.lastTitle = title;
+            if (title !== this.currentTitle) {
+                this.currentTitle = title;
 
-                this.handleClose();
-                this.handleOpen(title);
+                this.handleClose(card);
+                this.handleOpen(card, title);
             }
         }
     }
@@ -51,27 +52,58 @@ class BigCard {
         log(`videoId: ${videoId}`);
     }
 
-    private handleOpen(title: string): void {
+    private handleOpen(card: HTMLDivElement, title: string): void {
         log('open:', title);
         this._isOpen = true;
+        
+        this.waitCursor(card);
 
         this.trailers.askForTrailer(title)
-        .then((youtubeId) => console.log("then: " + youtubeId))
-        .catch((error) => console.error(`catch: ${error}`));
+            .then((youtubeId) => {
+                log("then: " + youtubeId);
+
+                if( this.currentTitle === title ) {
+                    this.waitCursor(card, false);
+
+                    // video
+                }
+            })
+            .catch((error) => console.error(`catch: ${error}`));
     }
 
-    private handleClose(): void {
+    private handleClose(card: HTMLDivElement): void {
         log('close');
-        
+
         this._isOpen = false;
         // TODO: continue here
     }
 
-    private getTitleFromCard() :string | null {
+    private getTitleFromCard(): string | null {
         try {
             return document.getElementsByClassName(BIG_CARD_CLASS)?.[0]?.getElementsByTagName("img")?.[0]?.alt;
         } catch (error) {
             return null;
+        }
+    }
+
+    private waitCursor(card: HTMLDivElement, waiting = true): void {
+        const _card = card.querySelector("div > a > div");
+        if( waiting ) {
+            _card.setAttribute('style', 'cursor: wait;');
+        } else {
+            _card.removeAttribute('style');
+        }
+    }
+
+    private lastCard(cards: HTMLDivElement[]): HTMLDivElement | null {
+        if (Array.isArray(cards)) {
+            const len = cards.length;
+
+            if (len === 0) {
+                return null;
+            }
+
+            return cards[len - 1];
         }
     }
 
