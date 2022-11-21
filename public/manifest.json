@@ -16,6 +16,7 @@
     "content_scripts": [
         {
             "matches": ["https://www.apps.disneyplus.com/*", "http://www.apps.disneyplus.com/*"],
+            "css": ["content_scripts.css"],
             "js": ["content_scripts.js"]
         }
     ]

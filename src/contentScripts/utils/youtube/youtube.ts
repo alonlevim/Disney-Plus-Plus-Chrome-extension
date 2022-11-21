@@ -26,7 +26,7 @@ class Youtube {
         this.iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
         this.iframe.setAttribute("frameborder", "0");
         this.iframe.setAttribute("src", "https://www.youtube.com/embed/" + youtubeId + "?autoplay=0&enablejsapi=1&controls=0&ref=0");
-        this.iframe.setAttribute("style", "transition: 0.5s opacity ease-in-out; opacity: 0;position: absolute; top: 0; right: 0; left: 0; bottom: 0; z-index: 1;");
+        this.iframe.setAttribute("style", "position: absolute; top: 0; right: 0; left: 0; bottom: 0; z-index: 1; ellipse(0% 0% at 0% 100%); opacity: 0;");
 
         // events
         this.iframe.addEventListener("load", this.onLoad);

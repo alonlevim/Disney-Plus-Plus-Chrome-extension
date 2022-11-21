@@ -1,0 +1,25 @@
+@keyframes showTrailer {
+  from {
+    clip-path: ellipse(0% 0% at 0% 100%);
+    opacity: 0;
+  }
+  to {
+    clip-path: ellipse(200% 200% at 0% 100%);
+    opacity: 1;
+  }
+}
+
+@keyframes hideTrailer {
+  0% {
+    clip-path: ellipse(200% 200% at 0% 100%);
+    opacity: 1;
+  }
+  75% {
+    clip-path: ellipse(150% 150% at 0% 100%);
+    opacity: 0;
+  }
+  100% {
+    clip-path: ellipse(0% 0% at 0% 100%);
+    opacity: 0;
+  }
+}

@@ -153,12 +153,20 @@ class BigCard {
         this.waitCursor(card, false);
 
         if( youtube.iframe ) {
-            youtube.iframe.setAttribute('style', youtube.iframe.getAttribute('style').replace('opacity: 0;', 'opacity: 1;'));
+            youtube.iframe.setAttribute(
+                'style',
+                youtube.iframe.getAttribute('style')
+                    .replace('ellipse(0% 0% at 0% 100%); opacity: 0;', 'animation: showTrailer 1s 1 ease-out;')
+            );
         }
     }
 
     private handleEnd = (youtube: Youtube) => {
-        youtube.iframe.setAttribute('style', youtube.iframe.getAttribute('style').replace('opacity: 1;', 'opacity: 0;'));
+        youtube.iframe.setAttribute(
+            'style',
+            youtube.iframe.getAttribute('style')
+                .replace('animation: showTrailer 1s 1 ease-out;', 'animation: hideTrailer 0.5s 1 ease-out;')
+            );
 
         setTimeout(() => {
             youtube.destroyIframe();
