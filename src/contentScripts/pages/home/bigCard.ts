@@ -31,8 +31,7 @@ class BigCard {
         }
 
         // find cards in HTML
-        const cards = Object.values(document.getElementsByClassName(BIG_CARD_CLASS)) as HTMLDivElement[];
-        const card = this.lastCard(cards);
+        const card = this.getCard();
 
         if (!card && this.watching) {
             this.handleClose(card);
@@ -48,39 +47,41 @@ class BigCard {
         }
     }
 
-    public showTrailer = (videoId: string): void => {
-        // TODO: continue here
-        log(`videoId: ${videoId}`);
-    }
-
-    private handleOpen(card: HTMLDivElement, title: string): void {
+    private handleOpen = (card: HTMLDivElement, title: string): void => {
         log('open:', title);
         this._isOpen = true;
+        this.watching = true;
         
         this.waitCursor(card);
 
-        this.trailers.askForTrailer(title)
+        this.trailers.askForTrailer(title, this.handleShow, this.handleEnd)
             .then((youtube) => {
                 log("then: " + youtube.youtubeId);
 
                 if( this.currentTitle === title ) {
-                    this.waitCursor(card, false);
-
-                    // hide image
-                    this.showAndHideImage(card);
-
                     // video
                     this.addIframe(card, youtube);
                 }
             })
-            .catch((error) => console.error(`catch: ${error}`));
+            .catch((error) => {
+                console.error(`catch: ${error}`);
+                
+                if( this.currentTitle === title ) {
+                    this.waitCursor(card, false);
+                }
+            });
     }
 
     private handleClose(card: HTMLDivElement): void {
         log('close');
 
         this._isOpen = false;
-        // TODO: continue here
+        this.watching = false;
+
+        const currentYoutube = this.trailers.getPlayingNow();
+        if( currentYoutube ) {
+            currentYoutube.destroyIframe();
+        }
     }
 
     private getTitleFromCard(): string | null {
@@ -92,12 +93,22 @@ class BigCard {
     }
 
     private waitCursor(card: HTMLDivElement, waiting = true): void {
-        const _card = card.querySelector("div > a > div");
-        if( waiting ) {
-            _card.setAttribute('style', 'cursor: wait;');
-        } else {
-            _card.removeAttribute('style');
+        try {
+            const _card = card.querySelector("div > a > div");
+            if( waiting ) {
+                _card.setAttribute('style', 'cursor: wait;');
+            } else {
+                _card.removeAttribute('style');
+            }
+        } catch (error) {
+            //
         }
+    }
+
+    private getCard = (): HTMLDivElement|null => {
+        // find cards in HTML
+        const cards = Object.values(document.getElementsByClassName(BIG_CARD_CLASS)) as HTMLDivElement[];
+        return this.lastCard(cards);
     }
 
     private lastCard(cards: HTMLDivElement[]): HTMLDivElement | null {
@@ -112,27 +123,46 @@ class BigCard {
         }
     }
 
-    private getImageElement(card: HTMLDivElement): HTMLDivElement {
-        return card.querySelectorAll("div > a > div > div")?.[1].querySelector("img");
-    }
-
-    private showAndHideImage(card: HTMLDivElement, show = false) {
-        const imageElement = this.getImageElement(card);
-
-        if( imageElement ) {
-            if( !show ) {
-                imageElement.setAttribute('style', 'transition: 0.5s opacity ease-out; opacity: 0;');
-            } else {
-                imageElement.setAttribute('style', 'transition: 0.5s opacity ease-out; opacity: 1;');
-            }
+    private getImageElement(card: HTMLDivElement): HTMLDivElement|null {
+        try {
+            return card.querySelectorAll("div > a > div > div")?.[1].querySelector("img");
+        } catch (error) {
+            return null;
         }
     }
 
     private addIframe(card: HTMLDivElement, youtube: Youtube): void {
         const imageElement = this.getImageElement(card);
+        
+        if( !imageElement ) {
+            return;
+        }
+
         const parent = imageElement.parentElement;
 
         parent.insertBefore(youtube.iframe, imageElement);
+    }
+
+    private handleShow = (youtube: Youtube) => {
+        const card = this.getCard();
+
+        if( !card ) {
+            return;
+        }
+        
+        this.waitCursor(card, false);
+
+        if( youtube.iframe ) {
+            youtube.iframe.setAttribute('style', youtube.iframe.getAttribute('style').replace('opacity: 0;', 'opacity: 1;'));
+        }
+    }
+
+    private handleEnd = (youtube: Youtube) => {
+        youtube.iframe.setAttribute('style', youtube.iframe.getAttribute('style').replace('opacity: 1;', 'opacity: 0;'));
+
+        setTimeout(() => {
+            youtube.destroyIframe();
+        }, 500);
     }
 
     public dispose = (): void => {

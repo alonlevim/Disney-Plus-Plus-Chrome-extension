@@ -5,13 +5,23 @@ class Trailer {
     youtubeId: string;
     youtube: Youtube;
     serverStatus: TRAILER_SERVER_STATUS;
-    serverResolve?: (youtube: Youtube) => void;
-    serverReject?: () => void;
+    private serverResolve?: (youtube: Youtube) => void;
+    private serverReject?: () => void;
+    private onStartPlaying: (youtube: Youtube) => void;
+    private onEndPlaying: (youtube: Youtube) => void;
 
-    constructor(title: string, resolve: (youtube: Youtube) => void, reject: () => void) {
+    constructor(
+        title: string,
+        resolve: (youtube: Youtube) => void,
+        reject: () => void,
+        onStartPlaying: (youtube: Youtube) => void,
+        onEndPlaying: (youtube: Youtube) => void
+    ) {
         this.title = title;
         this.serverResolve = resolve;
         this.serverReject = reject;
+        this.onStartPlaying = onStartPlaying;
+        this.onEndPlaying = onEndPlaying;
     }
 
     onResponseFromServer(status: TRAILER_SERVER_STATUS, youtubeId?: string): void {
@@ -25,7 +35,7 @@ class Trailer {
                 break;
             case TRAILER_SERVER_STATUS.SUCCESSED:
                 this.youtubeId = youtubeId;
-                this.youtube = new Youtube(youtubeId);
+                this.youtube = new Youtube(youtubeId, this.onStartPlaying, this.onEndPlaying);
                 this.serverResolve(this.youtube);
                 break;
             default:

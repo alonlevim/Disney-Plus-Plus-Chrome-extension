@@ -1,6 +1,7 @@
 import Trailer, { TRAILER_SERVER_STATUS } from "./trailer"
 import { askingForTrailer } from "../../networks/sendToBackground";
 import Youtube from "../youtube/youtube";
+import log from "../log";
 
 interface TrailersMap {
     [title: string]: Trailer
@@ -9,16 +10,30 @@ interface TrailersMap {
 class Trailers {
     private static _instance: Trailers;
     items: TrailersMap;
+    private playingNow?: Youtube;
 
     private constructor() {
         this.items = {};
+        this.onMessage();
     }
 
     public static get Instance(): Trailers {
         return this._instance || (this._instance = new this());
     }
 
-    public askForTrailer(title: string): Promise<Youtube> {
+    public getPlayingNow = () : Youtube => {
+        return this.playingNow;
+    }
+
+    public isCurrentYoutube = (youtube: Youtube) : boolean => {
+        return this.playingNow === youtube;
+    }
+
+    public askForTrailer(
+        title: string,
+        onStartPlaying: (youtube: Youtube) => void,
+        onEndPlaying: (youtube: Youtube) => void
+        ): Promise<Youtube> {
         return new Promise((resolve, reject) => {
             // exists
             if( typeof this.items[title] !== "undefined" ) {
@@ -26,7 +41,7 @@ class Trailers {
             }
 
             // new one
-            this.items[title] = new Trailer(title, resolve, reject);
+            this.items[title] = new Trailer(title, resolve, reject, onStartPlaying, onEndPlaying);
 
             // send to server
             askingForTrailer(title);
@@ -39,6 +54,35 @@ class Trailers {
         }
 
         this.items[title].onResponseFromServer(status, youtubeId);
+    }
+
+    public setPlayingNow(item?: Youtube): void {
+        this.playingNow = item;
+    }
+
+    private onMessage = () => {
+        window.addEventListener("message", (res) => {
+            if( this.playingNow ) {
+                try {
+                    const data = JSON.parse(res.data);
+
+                    switch(data.event) {
+                        case "infoDelivery":
+                            this.playingNow.onInfoDelivery(data.info);
+                            break;
+                        case "onStateChange":
+                            this.playingNow.onStateChange(data.info);
+                            break;
+                        default:
+                            log(data);
+                            break;
+                    }
+
+                } catch (error) {
+                    log(error);
+                }
+            }
+        });
     }
 }
 
