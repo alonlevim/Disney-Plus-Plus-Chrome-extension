@@ -66,6 +66,7 @@ class BigCard {
                     this.waitCursor(card, false);
 
                     // video
+                    this.showAndHideImage(card);
                 }
             })
             .catch((error) => console.error(`catch: ${error}`));
@@ -104,6 +105,18 @@ class BigCard {
             }
 
             return cards[len - 1];
+        }
+    }
+
+    private showAndHideImage(card: HTMLDivElement, show = false) {
+        const imgageElement = card.querySelectorAll("div > a > div > div")?.[1].querySelector("img");
+
+        if( imgageElement ) {
+            if( !show ) {
+                imgageElement.setAttribute('style', 'transition: 0.5s opacity ease-out; opacity: 0;');
+            } else {
+                imgageElement.setAttribute('style', 'transition: 0.5s opacity ease-out; opacity: 1;');
+            }
         }
     }
 
