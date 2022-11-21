@@ -8,13 +8,12 @@ class GetFromClient {
     private constructor() {
         chrome.runtime.onMessage.addListener(async (
             message: any,
-            sender: chrome.runtime.MessageSender,
-            sendResponse: (...data: any) => void
+            sender: chrome.runtime.MessageSender
         ) => {
             try {
                 switch (message?.message) {
                     case ASKING_FOR_TRAILER_FROM_CLIENT:
-                        askingForTrailer(message.title, sender.tab.id, sendResponse);
+                        askingForTrailer(message.title, sender.tab.id);
                         break;
                 }
             } catch (error) {

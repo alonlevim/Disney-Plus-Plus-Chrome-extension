@@ -1,6 +1,5 @@
-import cache from "../../cache/cache";
-import { askingForTrailer } from "../../networks/sendToBackground";
 import log from "../../utils/log";
+import trailers from "../../utils/trailers/trailers";
 
 const BIG_CARD_CLASS = "hover-card";
 
@@ -11,7 +10,7 @@ class BigCard {
     private watching = false;
     private lastTitle = "null";
     private _isOpen = false;
-    private cache = cache();
+    private trailers = trailers();
 
     public get isOpen(): boolean {
         return this._isOpen;
@@ -56,10 +55,9 @@ class BigCard {
         log('open:', title);
         this._isOpen = true;
 
-        askingForTrailer(title, () => {
-            // TODO: to think: move insertWaitingForVideo
-            this.cache.insertWaitingForVideo(title);
-        })
+        this.trailers.askForTrailer(title)
+        .then((youtubeId) => console.log("then: " + youtubeId))
+        .catch((error) => console.error(`catch: ${error}`));
     }
 
     private handleClose(): void {

@@ -1,13 +1,13 @@
-import cache from "../cache/cache";
-import bigCard from "../pages/home/bigCard";
 import { catchError } from "../utils/handleError";
 import log from "../utils/log";
+import { TRAILER_SERVER_STATUS } from "../utils/trailers/trailer";
+import { TrailerResponseFromServer } from "../utils/trailers/TrailerResponseFromServer.interface";
+import trailers from "../utils/trailers/trailers";
 import { RESPONSE_ABOUT_TRAILER } from "./actions";
 
 class GetFromBackground {
     private static _instance: GetFromBackground;
-    private cache = cache();
-    private bigCard = bigCard();
+    private trailers = trailers();
 
     private constructor() {
         chrome.runtime.onMessage.addListener((
@@ -16,7 +16,7 @@ class GetFromBackground {
             try {
                 switch (message?.message) {
                     case RESPONSE_ABOUT_TRAILER:
-                        this.responseAboutTrailer(message);
+                        this.responseAboutTrailer(message.res);
                         break;
                 }
             } catch (error) {
@@ -30,15 +30,10 @@ class GetFromBackground {
         return this._instance || (this._instance = new this());
     }
 
-    private responseAboutTrailer = (message: any) => {
-        log(message.res);
-
-        if (message?.res?.youtubeId) {
-            // cache
-            this.cache.insertVideo(message.res.title, message.res.youtubeId);
-            // show trailer
-            this.bigCard.showTrailer(message.res.youtubeId);
-        }
+    private responseAboutTrailer = (res: TrailerResponseFromServer) => {
+        const { title, youtubeId } = res;
+        const status = res.status === 'failed' ? TRAILER_SERVER_STATUS.FAILED : TRAILER_SERVER_STATUS.SUCCESSED;
+        this.trailers.responseFromServer(title, status, youtubeId);
     }
 }
 

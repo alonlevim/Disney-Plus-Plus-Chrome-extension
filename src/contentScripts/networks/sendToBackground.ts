@@ -7,14 +7,11 @@ export const sendError =
         chrome.runtime.sendMessage({ message: ERROR, error: error });
 
 
-export const askingForTrailer = (
-    title: string,
-    callback: (response: any) => void
-): void => {
+export const askingForTrailer = ( title: string ): void => {
 
     try {
         if (title) {
-            chrome.runtime.sendMessage({ message: ASKING_FOR_TRAILER, title }, callback);
+            chrome.runtime.sendMessage({ message: ASKING_FOR_TRAILER, title });
         }
     } catch (error) {
         catchError(error);

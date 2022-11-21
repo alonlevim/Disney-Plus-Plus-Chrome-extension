@@ -1,13 +1,14 @@
 import getVersion from "../getVersion";
 import { ASKING_FOR_TRAILER_TO_SERVER } from "./actions";
 import { sendToClientTrailer } from "./toClient";
+import { TrailerResponseFromServer } from "./TrailerResponseFromServer.interface";
 
 const { SERVER_URL } = process.env;
 
 export const sendRequestToServer = async (
     action: string,
     data: any,
-    cb?: (...data: any) => void
+    cb?: (res: TrailerResponseFromServer) => void
 ): Promise<void> => {
     data.version = await getVersion();
 
@@ -21,24 +22,29 @@ export const sendRequestToServer = async (
         .then(res => res.json())
         .then((res) => {
             if (typeof cb === "function") {
-                cb(res);
+                cb({
+                    title: res.title,
+                    youtubeId: res.youtubeId,
+                    status: 'successed'
+                });
             }
         })
-        .catch((err) => console.error(err));
+        .catch((err) => {
+            console.error(err);
+            cb({
+                title: data.title,
+                status: 'failed'
+            });
+        });
 };
 
 export const askingForTrailer = (
     title: string,
-    tabId: number,
-    callback?: (...data: any) => void
+    tabId: number
 ) => {
     sendRequestToServer(
         ASKING_FOR_TRAILER_TO_SERVER,
         { title: title },
-        (res: any) => sendToClientTrailer(tabId, res)
+        (res: TrailerResponseFromServer) => sendToClientTrailer(tabId, res)
     );
-
-    if (typeof callback === "function") {
-        callback({});
-    }
 };
