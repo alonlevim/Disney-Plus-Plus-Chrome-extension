@@ -1,5 +1,6 @@
 import log from "../../utils/log";
 import trailers from "../../utils/trailers/trailers";
+import Youtube from "../../utils/youtube/youtube";
 
 const BIG_CARD_CLASS = "hover-card";
 
@@ -59,14 +60,17 @@ class BigCard {
         this.waitCursor(card);
 
         this.trailers.askForTrailer(title)
-            .then((youtubeId) => {
-                log("then: " + youtubeId);
+            .then((youtube) => {
+                log("then: " + youtube.youtubeId);
 
                 if( this.currentTitle === title ) {
                     this.waitCursor(card, false);
 
-                    // video
+                    // hide image
                     this.showAndHideImage(card);
+
+                    // video
+                    this.addIframe(card, youtube);
                 }
             })
             .catch((error) => console.error(`catch: ${error}`));
@@ -108,16 +112,27 @@ class BigCard {
         }
     }
 
-    private showAndHideImage(card: HTMLDivElement, show = false) {
-        const imgageElement = card.querySelectorAll("div > a > div > div")?.[1].querySelector("img");
+    private getImageElement(card: HTMLDivElement): HTMLDivElement {
+        return card.querySelectorAll("div > a > div > div")?.[1].querySelector("img");
+    }
 
-        if( imgageElement ) {
+    private showAndHideImage(card: HTMLDivElement, show = false) {
+        const imageElement = this.getImageElement(card);
+
+        if( imageElement ) {
             if( !show ) {
-                imgageElement.setAttribute('style', 'transition: 0.5s opacity ease-out; opacity: 0;');
+                imageElement.setAttribute('style', 'transition: 0.5s opacity ease-out; opacity: 0;');
             } else {
-                imgageElement.setAttribute('style', 'transition: 0.5s opacity ease-out; opacity: 1;');
+                imageElement.setAttribute('style', 'transition: 0.5s opacity ease-out; opacity: 1;');
             }
         }
+    }
+
+    private addIframe(card: HTMLDivElement, youtube: Youtube): void {
+        const imageElement = this.getImageElement(card);
+        const parent = imageElement.parentElement;
+
+        parent.insertBefore(youtube.iframe, imageElement);
     }
 
     public dispose = (): void => {

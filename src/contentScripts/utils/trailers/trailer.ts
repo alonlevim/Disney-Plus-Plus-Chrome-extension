@@ -1,11 +1,14 @@
+import Youtube from "../youtube/youtube";
+
 class Trailer {
     title: string;
     youtubeId: string;
+    youtube: Youtube;
     serverStatus: TRAILER_SERVER_STATUS;
-    serverResolve?: (data: any) => void;
+    serverResolve?: (youtube: Youtube) => void;
     serverReject?: () => void;
 
-    constructor(title: string, resolve: (data: any) => void, reject: () => void) {
+    constructor(title: string, resolve: (youtube: Youtube) => void, reject: () => void) {
         this.title = title;
         this.serverResolve = resolve;
         this.serverReject = reject;
@@ -22,7 +25,8 @@ class Trailer {
                 break;
             case TRAILER_SERVER_STATUS.SUCCESSED:
                 this.youtubeId = youtubeId;
-                this.serverResolve(youtubeId);
+                this.youtube = new Youtube(youtubeId);
+                this.serverResolve(this.youtube);
                 break;
             default:
                 this.serverReject();

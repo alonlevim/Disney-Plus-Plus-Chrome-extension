@@ -1,5 +1,6 @@
 import Trailer, { TRAILER_SERVER_STATUS } from "./trailer"
 import { askingForTrailer } from "../../networks/sendToBackground";
+import Youtube from "../youtube/youtube";
 
 interface TrailersMap {
     [title: string]: Trailer
@@ -17,11 +18,11 @@ class Trailers {
         return this._instance || (this._instance = new this());
     }
 
-    public askForTrailer(title: string): Promise<string> {
+    public askForTrailer(title: string): Promise<Youtube> {
         return new Promise((resolve, reject) => {
             // exists
             if( typeof this.items[title] !== "undefined" ) {
-                return resolve(this.items[title].youtubeId);
+                return resolve(this.items[title].youtube);
             }
 
             // new one
