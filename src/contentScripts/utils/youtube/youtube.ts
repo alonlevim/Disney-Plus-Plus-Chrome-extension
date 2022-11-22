@@ -1,5 +1,6 @@
 import log from "../log";
 import trailers from "../trailers/trailers";
+import { BEFORE_TRAILER_START } from "./animationConstants";
 import { PLAYER_STATE } from "./PlayerState";
 
 class Youtube {
@@ -15,9 +16,18 @@ class Youtube {
 
     constructor(youtubeId: string, onShow: (youtube: Youtube) => void, onEnd: (youtube: Youtube) => void) {
         this.youtubeId = youtubeId;
+        this.initCallbacks(onShow, onEnd);
+        this.createIframe();
+
+        return this;
+    }
+
+    public initCallbacks = (onShow: (youtube: Youtube) => void, onEnd: (youtube: Youtube) => void) => {
         this._onShow = onShow;
         this._onEnd = onEnd;
+    }
 
+    public createIframe = () => {
         // attributes
         this.iframe = document.createElement("iframe");
         this.iframe.setAttribute("type", "text/html");
@@ -25,13 +35,11 @@ class Youtube {
         this.iframe.setAttribute("height", "100%");
         this.iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
         this.iframe.setAttribute("frameborder", "0");
-        this.iframe.setAttribute("src", "https://www.youtube.com/embed/" + youtubeId + "?autoplay=0&enablejsapi=1&controls=0&ref=0");
-        this.iframe.setAttribute("style", "position: absolute; top: 0; right: 0; left: 0; bottom: 0; z-index: 1; ellipse(0% 0% at 0% 100%); opacity: 0;");
+        this.iframe.setAttribute("src", "https://www.youtube.com/embed/" + this.youtubeId + "?autoplay=0&enablejsapi=1&controls=0&ref=0");
+        this.iframe.setAttribute("style", "position: absolute; top: 0; right: 0; left: 0; bottom: 0; z-index: 1; " + BEFORE_TRAILER_START);
 
         // events
         this.iframe.addEventListener("load", this.onLoad);
-
-        return this;
     }
 
     private onLoad = () => {

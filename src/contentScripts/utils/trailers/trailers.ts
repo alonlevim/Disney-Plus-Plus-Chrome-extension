@@ -37,6 +37,11 @@ class Trailers {
         return new Promise((resolve, reject) => {
             // exists
             if( typeof this.items[title] !== "undefined" ) {
+                // set callbacks
+                this.items[title].youtube.initCallbacks(onStartPlaying, onEndPlaying);
+                // create again iframe
+                this.items[title].youtube.createIframe();
+
                 return resolve(this.items[title].youtube);
             }
 

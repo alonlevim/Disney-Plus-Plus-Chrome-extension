@@ -1,5 +1,6 @@
 import log from "../../utils/log";
 import trailers from "../../utils/trailers/trailers";
+import { BEFORE_TRAILER_START, ON_END_TRAILER, ON_START_TRAILER } from "../../utils/youtube/animationConstants";
 import Youtube from "../../utils/youtube/youtube";
 
 const BIG_CARD_CLASS = "hover-card";
@@ -39,9 +40,10 @@ class BigCard {
             const title = this.getTitleFromCard();
 
             if (title !== this.currentTitle) {
+                this.handleClose(card);
+
                 this.currentTitle = title;
 
-                this.handleClose(card);
                 this.handleOpen(card, title);
             }
         }
@@ -77,6 +79,7 @@ class BigCard {
 
         this._isOpen = false;
         this.watching = false;
+        this.currentTitle = "null";
 
         const currentYoutube = this.trailers.getPlayingNow();
         if( currentYoutube ) {
@@ -156,7 +159,7 @@ class BigCard {
             youtube.iframe.setAttribute(
                 'style',
                 youtube.iframe.getAttribute('style')
-                    .replace('ellipse(0% 0% at 0% 100%); opacity: 0;', 'animation: showTrailer 1s 1 ease-out;')
+                    .replace(BEFORE_TRAILER_START, ON_START_TRAILER)
             );
         }
     }
@@ -165,7 +168,7 @@ class BigCard {
         youtube.iframe.setAttribute(
             'style',
             youtube.iframe.getAttribute('style')
-                .replace('animation: showTrailer 1s 1 ease-out;', 'animation: hideTrailer 0.5s 1 ease-out;')
+                .replace(ON_START_TRAILER, ON_END_TRAILER)
             );
 
         setTimeout(() => {
