@@ -1,8 +1,10 @@
 /node_modules
 /dist
 /.vscode
+/releases
 
 # .env files
 development.env
 production.env
 .DS_Store
+publish.sh

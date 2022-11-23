@@ -1,5 +1,6 @@
 export default function(...data: any) {
-    if( process.env.DEBUG ) {
+    window.debug = process.env.DEBUG === "true";
+    if( process.env.DEBUG === "true" ) {
         console.log(...data);
     }
 }
