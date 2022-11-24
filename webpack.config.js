@@ -9,8 +9,8 @@ module.exports = (env, argv) => ({
    devtool: 'source-map',
 
    entry: {
-      service_worker: './src/background/index.ts',
-      content_scripts: './src/contentScripts/index.ts',
+      serviceWorker: './src/background/index.ts',
+      contentScripts: './src/contentScripts/index.ts',
    },
 
    output: {
