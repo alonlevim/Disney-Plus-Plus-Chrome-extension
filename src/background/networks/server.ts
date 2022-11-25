@@ -1,5 +1,6 @@
 import getVersion from "../getVersion";
 import { ASKING_FOR_TRAILER_TO_SERVER } from "./actions";
+import { Languages } from "./server.interface";
 import { sendToClientTrailer } from "./toClient";
 import { TrailerResponseFromServer } from "./TrailerResponseFromServer.interface";
 
@@ -40,11 +41,12 @@ export const sendRequestToServer = async (
 
 export const askingForTrailer = (
     title: string,
-    tabId: number
+    tabId: number,
+    lang?: Languages
 ) => {
     sendRequestToServer(
         ASKING_FOR_TRAILER_TO_SERVER,
-        { title: title },
+        { title, lang },
         (res: TrailerResponseFromServer) => sendToClientTrailer(tabId, res)
     );
 };

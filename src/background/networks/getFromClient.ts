@@ -13,7 +13,7 @@ class GetFromClient {
             try {
                 switch (message?.message) {
                     case ASKING_FOR_TRAILER_FROM_CLIENT:
-                        askingForTrailer(message.title, sender.tab.id);
+                        askingForTrailer(message.title, sender.tab.id, message?.lang);
                         break;
                 }
             } catch (error) {
