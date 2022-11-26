@@ -1,4 +1,5 @@
 import { catchError } from "../../../utils/handleError";
+import { fromUrlToItemId } from "../../../utils/helper";
 import trailers from "../../../utils/trailers/trailers";
 import {
     BEFORE_TRAILER_START,
@@ -60,13 +61,12 @@ class PromotionHeader {
         }
     }
 
-    private getId(): string | null {
+    private getItemId(): string | null {
         try {
-            const temp = document.querySelector(PROMOTION_ACTIONS_PATH).firstChild as Element;
-            const href = temp.querySelector("a").getAttribute("href");
-            const values = href.split("/watch")[0].split("/");
+            const element = document.querySelector(PROMOTION_ACTIONS_PATH).firstChild as Element;
+            const href = element.querySelector("a").getAttribute("href");
 
-            return values[values.length - 1];
+            return fromUrlToItemId(href);
         } catch (error) {
             return null;
         }
@@ -83,7 +83,7 @@ class PromotionHeader {
                 watching: false,
             };
 
-            const itemId = this.getId();
+            const itemId = this.getItemId();
 
             // get video
             this.trailers.askForTrailer(title, itemId)

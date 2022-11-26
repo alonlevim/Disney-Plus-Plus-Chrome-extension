@@ -17,7 +17,7 @@ class GetFromClient {
                             {
                                 title: message.title,
                                 lang: message?.lang,
-                                itemId: message?.itemId
+                                itemId: message.itemId
                             },
                             sender.tab.id,
                         );

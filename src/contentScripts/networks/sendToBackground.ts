@@ -20,7 +20,7 @@ const lang = (): Languages => ({
     rtl: isRtl()
 })
 
-export const askingForTrailer = ( title: string, itemId?: string ): void => {
+export const askingForTrailer = ( title: string, itemId: string ): void => {
 
     try {
         if (title) {

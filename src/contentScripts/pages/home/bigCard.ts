@@ -1,4 +1,5 @@
 import { catchError } from "../../utils/handleError";
+import { fromUrlToItemId } from "../../utils/helper";
 import log from "../../utils/log";
 import trailers from "../../utils/trailers/trailers";
 import { BEFORE_TRAILER_START, ON_END_TRAILER, ON_START_TRAILER } from "../../utils/youtube/animationConstants";
@@ -57,7 +58,14 @@ class BigCard {
         
         this.waitCursor(card);
 
-        this.trailers.askForTrailerAutoPlay(title, this.handleShow, this.handleEnd)
+        const itemId = this.getItemId();
+
+        this.trailers.askForTrailerAutoPlay(
+            title,
+            itemId,
+            this.handleShow,
+            this.handleEnd
+            )
             .then((youtube) => {
                 log("then: " + youtube.youtubeId);
 
@@ -92,6 +100,15 @@ class BigCard {
     private getTitleFromCard(): string | null {
         try {
             return document.getElementsByClassName(BIG_CARD_CLASS)?.[0]?.getElementsByTagName("img")?.[0]?.alt;
+        } catch (error) {
+            return null;
+        }
+    }
+
+    private getItemId(): string | null {
+        try {
+            const href = document.getElementsByClassName(BIG_CARD_CLASS)?.[0].querySelector("._1H-O28YB0bAyIrak-q1pg6 a").getAttribute("href");
+            return fromUrlToItemId(href);
         } catch (error) {
             return null;
         }

@@ -52,6 +52,7 @@ class Trailers {
 
     public askForTrailerAutoPlay(
         title: string,
+        itemId: string,
         onStartPlaying: (youtube: Youtube) => void,
         onEndPlaying: (youtube: Youtube) => void
         ): Promise<Youtube> {
@@ -71,7 +72,7 @@ class Trailers {
             this.items[title].initAutoPlayCallbacks(onStartPlaying, onEndPlaying);
 
             // send to server
-            askingForTrailer(title);
+            askingForTrailer(title, itemId);
         });
     }
 

@@ -51,7 +51,7 @@ export const askingForTrailer = (
         ASKING_FOR_TRAILER_TO_SERVER,
         {
             title: data.title,
-            itemId: data?.itemId,
+            itemId: data.itemId,
             lang: data?.lang
         },
         (res: TrailerResponseFromServer) => sendToClientTrailer(tabId, res)
