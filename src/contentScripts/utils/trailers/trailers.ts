@@ -29,6 +29,26 @@ class Trailers {
         return this.playingNow === youtube;
     }
 
+    public askForTrailer(
+        title: string
+        ): Promise<Youtube> {
+        return new Promise((resolve, reject) => {
+            // exists
+            if( typeof this.items[title] !== "undefined" ) {
+                // create again iframe
+                this.items[title].youtube.createIframe();
+
+                return resolve(this.items[title].youtube);
+            }
+
+            // new one
+            this.items[title] = new Trailer(title, resolve, reject);
+
+            // send to server
+            askingForTrailer(title);
+        });
+    }
+
     public askForTrailerAutoPlay(
         title: string,
         onStartPlaying: (youtube: Youtube) => void,

@@ -41,6 +41,14 @@ class Youtube {
         this.iframe.addEventListener("load", this.onLoad);
     }
 
+    public getIframe = (): HTMLIFrameElement => {
+        if( !this.iframe ) {
+            this.createIframe();
+        }
+
+        return this.iframe;
+    }
+
     private onLoad = () => {
         log("loaded");
         this.initAfterLoad();

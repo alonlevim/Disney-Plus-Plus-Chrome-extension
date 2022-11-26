@@ -1,3 +1,64 @@
+.loaderT {
+  height: 15px;
+  width: 35px;
+  position: relative;
+  overflow: hidden;
+}
+.loaderT:before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  border: 2px solid #0000;
+  border-color: #fff #fff #0000 #0000;
+  border-radius: 50%;
+  box-sizing: border-box;
+  animation: rotateT 3s ease-in-out infinite;
+  transform: translateX(-50%) rotate(-200deg);
+}
+@keyframes rotateT {
+  0% {
+    border-width: 3px;
+  }
+  25% {
+    border-width: 1px;
+  }
+  50% {
+    transform: translateX(-50%) rotate(115deg);
+    border-width: 3px;
+  }
+  75% {
+    border-width: 1px;
+  }
+  100% {
+    border-width: 3px;
+  }
+}
+
+@keyframes enterBigTrailer {
+  from {
+    clip-path: ellipse(0% 0% at 0% 100%);
+    opacity: 0;
+  }
+  to {
+    clip-path: ellipse(200% 200% at 0% 100%);
+    opacity: 1;
+  }
+}
+
+@keyframes exitBigTrailer {
+  from {
+    clip-path: ellipse(200% 200% at 0% 100%);
+    opacity: 1;
+  }
+  to {
+    clip-path: ellipse(0% 0% at 0% 100%);
+    opacity: 0;
+  }
+}
+
 @keyframes showTrailer {
   from {
     clip-path: ellipse(0% 0% at 0% 100%);

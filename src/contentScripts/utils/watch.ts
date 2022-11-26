@@ -1,4 +1,5 @@
 import BigCard from "../pages/home/bigCard";
+import PromotionHeader from "../pages/home/promotionHeader/promotionHeader";
 import MoviesAndShowsInstance from "../pages/moviesAndShows/moviesAndShows";
 import Router from "../router";
 
@@ -7,6 +8,7 @@ class Watch {
     private static router = Router();
     private static bigCard = BigCard();
     private static moviesAndShowsInstance = MoviesAndShowsInstance();
+    private static promotionHeader = PromotionHeader();
 
     private constructor() {
         const observer = new MutationObserver(this.listener);
@@ -25,6 +27,7 @@ class Watch {
         Watch.router.handleChangePage();
         Watch.bigCard.update();
         Watch.moviesAndShowsInstance.update();
+        Watch.promotionHeader.update();
     }
 }
 
