@@ -18,3 +18,11 @@ export interface PromotionItem {
     },
     youtube?: Youtube;
 }
+
+export interface Translation {
+    [word: string]: {
+        "en": string;
+        "ar": string;
+        "he": string;
+    }
+}

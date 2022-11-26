@@ -8,12 +8,13 @@ class Home implements Page {
     private promotionHeader = PromotionHeader();
 
     init = (): void => {
-        log('home init');
+        log('init home');
         this.bigCard.init();
         this.promotionHeader.init();
     }
 
     dispose = (): void => {
+        log('dispose home');
         this.bigCard.dispose();
         this.promotionHeader.dispose();
     }
