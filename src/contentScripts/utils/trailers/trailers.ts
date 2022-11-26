@@ -30,7 +30,8 @@ class Trailers {
     }
 
     public askForTrailer(
-        title: string
+        title: string,
+        itemId?: string,
         ): Promise<Youtube> {
         return new Promise((resolve, reject) => {
             // exists
@@ -45,7 +46,7 @@ class Trailers {
             this.items[title] = new Trailer(title, resolve, reject);
 
             // send to server
-            askingForTrailer(title);
+            askingForTrailer(title, itemId);
         });
     }
 

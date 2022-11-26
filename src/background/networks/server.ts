@@ -40,13 +40,20 @@ export const sendRequestToServer = async (
 };
 
 export const askingForTrailer = (
-    title: string,
-    tabId: number,
-    lang?: Languages
+    data: {
+        title: string;
+        lang?: Languages,
+        itemId?: string;
+    },
+    tabId: number
 ) => {
     sendRequestToServer(
         ASKING_FOR_TRAILER_TO_SERVER,
-        { title, lang },
+        {
+            title: data.title,
+            itemId: data?.itemId,
+            lang: data?.lang
+        },
         (res: TrailerResponseFromServer) => sendToClientTrailer(tabId, res)
     );
 };

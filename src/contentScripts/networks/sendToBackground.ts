@@ -20,11 +20,16 @@ const lang = (): Languages => ({
     rtl: isRtl()
 })
 
-export const askingForTrailer = ( title: string ): void => {
+export const askingForTrailer = ( title: string, itemId?: string ): void => {
 
     try {
         if (title) {
-            chrome.runtime.sendMessage({ message: ASKING_FOR_TRAILER, title, lang: lang() });
+            chrome.runtime.sendMessage({
+                message: ASKING_FOR_TRAILER,
+                title,
+                itemId,
+                lang: lang()
+            });
         }
     } catch (error) {
         catchError(error);

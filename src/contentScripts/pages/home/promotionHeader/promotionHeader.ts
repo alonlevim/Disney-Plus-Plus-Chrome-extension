@@ -11,6 +11,7 @@ import { PromotionItem, PromotionList } from "./promotionHeader.interface";
 import translate from "./promotionHeader.translation";
 
 const PROMOTION_IMAGE_PATH = "._1grSXqPibJda0muajkRKkU";
+const PROMOTION_ACTIONS_PATH = "._3WOPDH3uV90WJTM6_qrL6J";
 
 class PromotionHeader {
     private static _instance: PromotionHeader;
@@ -59,6 +60,18 @@ class PromotionHeader {
         }
     }
 
+    private getId(): string | null {
+        try {
+            const temp = document.querySelector(PROMOTION_ACTIONS_PATH).firstChild as Element;
+            const href = temp.querySelector("a").getAttribute("href");
+            const values = href.split("/watch")[0].split("/");
+
+            return values[values.length - 1];
+        } catch (error) {
+            return null;
+        }
+    }
+
     private handleTitle(title: string): void {
         if (typeof this.list[title] === "undefined") {
             // new title
@@ -70,8 +83,10 @@ class PromotionHeader {
                 watching: false,
             };
 
+            const itemId = this.getId();
+
             // get video
-            this.trailers.askForTrailer(title)
+            this.trailers.askForTrailer(title, itemId)
                 .then((youtube) => {
                     this.list[title].youtube = youtube;
                     this.list[title].loading = false;
@@ -115,7 +130,7 @@ class PromotionHeader {
             level_1_div.appendChild(level_2_div);
             item.btnUI.level_1 = level_1_div;
 
-            document.querySelector("._3WOPDH3uV90WJTM6_qrL6J").appendChild(level_1_div);
+            document.querySelector(PROMOTION_ACTIONS_PATH).appendChild(level_1_div);
 
             this.list[item.title].addedBtn = true;
         } catch (error) {
