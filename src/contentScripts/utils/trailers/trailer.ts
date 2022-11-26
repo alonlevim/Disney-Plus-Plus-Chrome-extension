@@ -13,13 +13,17 @@ class Trailer {
     constructor(
         title: string,
         resolve: (youtube: Youtube) => void,
-        reject: () => void,
-        onStartPlaying: (youtube: Youtube) => void,
-        onEndPlaying: (youtube: Youtube) => void
+        reject: () => void
     ) {
         this.title = title;
         this.serverResolve = resolve;
         this.serverReject = reject;
+    }
+
+    initAutoPlayCallbacks(
+        onStartPlaying: (youtube: Youtube) => void,
+        onEndPlaying: (youtube: Youtube) => void
+    ): void {
         this.onStartPlaying = onStartPlaying;
         this.onEndPlaying = onEndPlaying;
     }
@@ -35,7 +39,8 @@ class Trailer {
                 break;
             case TRAILER_SERVER_STATUS.SUCCESSED:
                 this.youtubeId = youtubeId;
-                this.youtube = new Youtube(youtubeId, this.onStartPlaying, this.onEndPlaying);
+                this.youtube = new Youtube(youtubeId);
+                this.youtube.initCallbacks(this.onStartPlaying, this.onEndPlaying);
                 this.serverResolve(this.youtube);
                 break;
             default:

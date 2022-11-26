@@ -29,7 +29,7 @@ class Trailers {
         return this.playingNow === youtube;
     }
 
-    public askForTrailer(
+    public askForTrailerAutoPlay(
         title: string,
         onStartPlaying: (youtube: Youtube) => void,
         onEndPlaying: (youtube: Youtube) => void
@@ -46,7 +46,8 @@ class Trailers {
             }
 
             // new one
-            this.items[title] = new Trailer(title, resolve, reject, onStartPlaying, onEndPlaying);
+            this.items[title] = new Trailer(title, resolve, reject);
+            this.items[title].initAutoPlayCallbacks(onStartPlaying, onEndPlaying);
 
             // send to server
             askingForTrailer(title);

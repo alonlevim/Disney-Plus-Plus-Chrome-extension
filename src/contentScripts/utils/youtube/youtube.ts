@@ -14,9 +14,8 @@ class Youtube {
     private listening = false;
     private unstatred = false;
 
-    constructor(youtubeId: string, onShow: (youtube: Youtube) => void, onEnd: (youtube: Youtube) => void) {
+    constructor(youtubeId: string) {
         this.youtubeId = youtubeId;
-        this.initCallbacks(onShow, onEnd);
         this.createIframe();
 
         return this;

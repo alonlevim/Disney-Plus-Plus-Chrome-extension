@@ -1,3 +1,4 @@
+import { catchError } from "../../utils/handleError";
 import log from "../../utils/log";
 import trailers from "../../utils/trailers/trailers";
 import { BEFORE_TRAILER_START, ON_END_TRAILER, ON_START_TRAILER } from "../../utils/youtube/animationConstants";
@@ -56,7 +57,7 @@ class BigCard {
         
         this.waitCursor(card);
 
-        this.trailers.askForTrailer(title, this.handleShow, this.handleEnd)
+        this.trailers.askForTrailerAutoPlay(title, this.handleShow, this.handleEnd)
             .then((youtube) => {
                 log("then: " + youtube.youtubeId);
 
@@ -66,7 +67,8 @@ class BigCard {
                 }
             })
             .catch((error) => {
-                console.error(`catch: ${error}`);
+                console.error(error);
+                catchError(error);
                 
                 if( this.currentTitle === title ) {
                     this.waitCursor(card, false);
