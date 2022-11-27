@@ -1,4 +1,5 @@
 import { sendError } from '../handleError';
+import { TrailerResponseFromServer } from '../networks/TrailerResponseFromServer.interface';
 import { TrailerInterface, TrailersInterface } from './trailers.interface'
 
 export class Trailers {
@@ -22,6 +23,22 @@ export class Trailers {
             for (const title in newList) {
                 this.list[title] = { ...newList[title] };
             }
+        } catch (error) {
+            console.error(error);
+            sendError(error);
+        }
+    }
+
+    public insertOne = (newItem: TrailerInterface | TrailerResponseFromServer): void => {
+        if (!newItem || typeof newItem !== "object" || !newItem?.title) {
+            return;
+        }
+
+        try {
+            this.list[newItem.title] = {
+                title: newItem.title,
+                youtubeId: newItem.youtubeId
+            };
         } catch (error) {
             console.error(error);
             sendError(error);

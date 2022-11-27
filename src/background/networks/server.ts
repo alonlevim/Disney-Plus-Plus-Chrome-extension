@@ -75,6 +75,10 @@ export const askingForTrailer = (
                 }
             ) as TrailerResponseFromServer;
 
+            // add to cache
+            trailers().insertOne(data);
+
+            // back to client
             sendToClientTrailer(tabId, data);
         }
     );
