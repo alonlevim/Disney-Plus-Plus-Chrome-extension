@@ -1,6 +1,8 @@
+import translate from "../../../translation/trailer.translation";
 import { catchError } from "../../../utils/handleError";
 import { fromUrlToItemId } from "../../../utils/helper";
-import trailers from "../../../utils/trailers/trailers";
+import HeroClass from "../../../utils/hero/hero.class";
+import { HeroItem } from "../../../utils/hero/hero.interface";
 import {
     BEFORE_TRAILER_START,
     ON_END_TRAILER,
@@ -8,37 +10,33 @@ import {
     ON_START_ANIMATION_ENDED_TRAILER_2,
     ON_START_TRAILER
 } from "./promotionHeader.animation";
-import { PromotionItem, PromotionList } from "./promotionHeader.interface";
-import translate from "./promotionHeader.translation";
+import { HeroList } from "./heroHomePage.interface";
 
 const PROMOTION_IMAGE_PATH = "._1grSXqPibJda0muajkRKkU";
 const PROMOTION_ACTIONS_PATH = "._3WOPDH3uV90WJTM6_qrL6J";
+const MY_CUSTOM_CLASS_NAME = "_h5HKCc9DKsS8pFFm";
 
-class PromotionHeader {
-    private static _instance: PromotionHeader;
+class HeroHomePage extends HeroClass {
+    private static _instance: HeroHomePage;
 
-    private trailers = trailers();
     private lastTitle = "null";
-    private canWatch = false;
-    private list: PromotionList;
-    private currentItem: PromotionItem;
+    private list: HeroList;
 
     private constructor() {
+        super();
         this.list = {};
     }
 
-    public static get Instance(): PromotionHeader {
+    public static get Instance(): HeroHomePage {
         return this._instance || (this._instance = new this());
-    }
-
-    public init(): void {
-        this.canWatch = true;
     }
 
     public update(): void {
         if (!this.canWatch) {
             return;
         }
+
+        this.fixMissingBtn();
 
         const title = this.getTitle();
 
@@ -53,26 +51,7 @@ class PromotionHeader {
         }
     }
 
-    private getTitle(): string | null {
-        try {
-            return document.querySelector(PROMOTION_IMAGE_PATH)?.getAttribute("alt");
-        } catch (error) {
-            return null;
-        }
-    }
-
-    private getItemId(): string | null {
-        try {
-            const element = document.querySelector(PROMOTION_ACTIONS_PATH).firstChild as Element;
-            const href = element.querySelector("a").getAttribute("href");
-
-            return fromUrlToItemId(href);
-        } catch (error) {
-            return null;
-        }
-    }
-
-    private handleTitle(title: string): void {
+    protected override handleTitle(title: string): void {
         if (typeof this.list[title] === "undefined") {
             // new title
             this.list[title] = {
@@ -103,7 +82,26 @@ class PromotionHeader {
         }
     }
 
-    private addBtn(item: PromotionItem): void {
+    protected getTitle(): string {
+        try {
+            return document.querySelector(PROMOTION_IMAGE_PATH)?.getAttribute("alt");
+        } catch (error) {
+            return null;
+        }
+    }
+
+    protected getItemId(): string {
+        try {
+            const element = document.querySelector(PROMOTION_ACTIONS_PATH).firstChild as Element;
+            const href = element.querySelector("a").getAttribute("href");
+
+            return fromUrlToItemId(href);
+        } catch (error) {
+            return null;
+        }
+    }
+
+    protected addBtn(item: HeroItem): void {
         try {
             let level_5_span = document.createElement("span");
             level_5_span = this.changeTextOnButton(item, level_5_span);
@@ -139,24 +137,6 @@ class PromotionHeader {
         }
     }
 
-    private updateBtnUiFromLoadingToAllowToShowTrailer(item: PromotionItem): void {
-        if (item.btnUI.level_5) {
-            this.changeTextOnButton(item, item.btnUI.level_5);
-        }
-    }
-
-    private changeTextOnButton(item: PromotionItem, level_5_span: HTMLSpanElement): HTMLSpanElement {
-        if (item.loading) {
-            level_5_span.className = "loaderT";
-        } else {
-            level_5_span.innerText = translate("Trailer");
-            level_5_span.className = "ON_IMAGE BUTTON2_SEMIBOLD";
-            level_5_span.setAttribute('style', 'font-family: var(--FONT-FAMILY);');
-        }
-
-        return level_5_span;
-    }
-
     private cleanPreItem(): void {
         if (this.currentItem) {
             this.currentItem.addedBtn = false;
@@ -165,7 +145,7 @@ class PromotionHeader {
         }
     }
 
-    private onClickTrailer = (ev: MouseEvent): void => {
+    protected onClickTrailer = (ev: MouseEvent): void => {
         ev.stopPropagation();
         ev.preventDefault();
 
@@ -197,7 +177,7 @@ class PromotionHeader {
         }
     }
 
-    private onEnterTrailer = (): void => {
+    protected onEnterTrailer = (): void => {
         this.currentItem.youtube.getIframe().setAttribute('style', ON_START_TRAILER)
         this.currentItem.btnUI.level_5.innerText = translate("Stop");
 
@@ -213,7 +193,7 @@ class PromotionHeader {
         }, 400);
     }
 
-    private onEndTrailer = (): void => {
+    protected onEndTrailer = (): void => {
         this.currentItem.youtube.getIframe().setAttribute(
             'style',
             this.currentItem.youtube.getIframe().getAttribute('style')
@@ -232,9 +212,17 @@ class PromotionHeader {
         }, 400);
     }
 
-    public dispose = (): void => {
-        this.canWatch = false;
+    protected fixMissingBtn(): void {
+        if (!this.currentItem?.addedBtn || this.currentItem?.fixedMissingBtn) {
+            return;
+        }
+
+        const btnElementAtDom = document.querySelector(`.${MY_CUSTOM_CLASS_NAME}`);
+        if (!btnElementAtDom) {
+            this.currentItem.addedBtn = false;
+            this.currentItem.fixedMissingBtn = true;
+        }
     }
 }
 
-export default () => PromotionHeader.Instance;
+export default () => HeroHomePage.Instance;

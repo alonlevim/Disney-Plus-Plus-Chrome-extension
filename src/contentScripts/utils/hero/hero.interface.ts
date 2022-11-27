@@ -1,10 +1,16 @@
-import Youtube from "../../../utils/youtube/youtube";
+import Youtube from "../youtube/youtube";
 
-export interface PromotionList {
-    [title: string]: PromotionItem
+export interface HeroInterface {
+    init: () => void;
+    update: () => void;
+    dispose: () => void;
 }
 
-export interface PromotionItem {
+export interface HeroList {
+    [title: string]: HeroItem
+}
+
+export interface HeroItem {
     addedBtn: boolean;
     loading: boolean;
     title: string;
@@ -17,12 +23,5 @@ export interface PromotionItem {
         level_5?: HTMLElement;
     },
     youtube?: Youtube;
-}
-
-export interface Translation {
-    [word: string]: {
-        "en": string;
-        "ar": string;
-        "he": string;
-    }
+    fixedMissingBtn?: boolean;
 }

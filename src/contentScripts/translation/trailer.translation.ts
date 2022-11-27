@@ -1,5 +1,5 @@
-import { getUILang } from "../../../utils/getLanguage";
-import { Translation } from "./promotionHeader.interface";
+import { getUILang } from "../utils/getLanguage";
+import Translation from "./translation.interface";
 
 const map = {
     "TRAILER": {

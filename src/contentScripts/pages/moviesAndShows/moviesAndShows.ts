@@ -3,12 +3,14 @@ import { catchError } from "../../utils/handleError";
 import log from "../../utils/log";
 import { Page } from "../page.interface";
 import { MOVIES, SHOWS } from "../pagesConstants";
+import HeroMoviesAndShows from "./hero/heroMoviesAndShows";
 
 const PATH_DOUBLE_CLICK = "#__next > div:nth-child(3) > div > div:nth-child(1) > div:nth-child(1) > div";
 
 export class MoviesAndShows implements Page {
     private static _instance: MoviesAndShows;
     private setupDoubleClickListener = false;
+    private hero = HeroMoviesAndShows();
 
     public static get Instance(): MoviesAndShows {
         return this._instance || (this._instance = new this());
@@ -16,6 +18,7 @@ export class MoviesAndShows implements Page {
 
     public init = (): void => {
         log('init MoviesAndShows');
+        this.hero.init();
     }
 
     public update = () => {
@@ -34,6 +37,13 @@ export class MoviesAndShows implements Page {
                 this.setupDoubleClickListener = true;
                 this.enableDoubleClickOnMovieOrShowsScreen();
             }
+        } catch (error) {
+            catchError(error);
+        }
+
+        // Hero
+        try {
+            this.hero.update();
         } catch (error) {
             catchError(error);
         }
@@ -73,6 +83,7 @@ export class MoviesAndShows implements Page {
 
     public dispose = (): void => {
         log('dispose MoviesAndShows');
+        this.hero.dispose();
         
         try {
             if (this.setupDoubleClickListener) {
