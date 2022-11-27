@@ -4,3 +4,7 @@ export interface Languages {
     audio?: string;
     rtl?: boolean;
 }
+
+export interface LanguagesAndCountry extends Languages {
+    country: string;
+}

@@ -5,7 +5,11 @@ import {
     isRtl
 } from "../utils/getLanguage";
 import { catchError } from "../utils/handleError";
-import { ASKING_FOR_TRAILER, ERROR } from "./actions";
+import {
+    ASKING_FOR_TRAILER,
+    ERROR,
+    SEND_INIT
+} from "./actions";
 import { Languages } from "./server.interface";
 
 export const sendError =
@@ -20,8 +24,7 @@ const lang = (): Languages => ({
     rtl: isRtl()
 })
 
-export const askingForTrailer = ( title: string, itemId: string ): void => {
-
+export const askingForTrailer = (title: string, itemId: string): void => {
     try {
         if (title) {
             chrome.runtime.sendMessage({
@@ -34,5 +37,12 @@ export const askingForTrailer = ( title: string, itemId: string ): void => {
     } catch (error) {
         catchError(error);
     }
+}
 
+export const sendToBackgroundInit = (): void => {
+    try {
+        chrome.runtime.sendMessage({ message: SEND_INIT });
+    } catch (error) {
+        catchError(error);
+    }
 }

@@ -1,6 +1,11 @@
 import getVersion from "../getVersion";
-import { ASKING_FOR_TRAILER_TO_SERVER } from "./actions";
-import { Languages } from "./server.interface";
+import trailers from "../trailers/trailers";
+import { TrailersInterface } from "../trailers/trailers.interface";
+import {
+    ASKING_FOR_TRAILER_FROM_SERVER,
+    TRAILERS_FROM_SERVER
+} from "./actions";
+import { Languages, LanguagesAndCountry } from "./server.interface";
 import { sendToClientTrailer } from "./toClient";
 import { TrailerResponseFromServer } from "./TrailerResponseFromServer.interface";
 
@@ -9,7 +14,7 @@ const { SERVER_URL } = process.env;
 export const sendRequestToServer = async (
     action: string,
     data: any,
-    cb?: (res: TrailerResponseFromServer) => void
+    cb?: (res: any) => void
 ): Promise<void> => {
     data.version = await getVersion();
 
@@ -21,21 +26,19 @@ export const sendRequestToServer = async (
         body: JSON.stringify(data)
     })
         .then(res => res.json())
-        .then((res) => {
+        .then(data => {
             if (typeof cb === "function") {
-                cb({
-                    title: res.title,
-                    youtubeId: res.youtubeId,
-                    status: 'successed'
-                });
+                cb(data);
+            }
+            else {
+                throw new Error('Missing cb in sendRequestToServer.');
             }
         })
         .catch((err) => {
             console.error(err);
-            cb({
-                title: data.title,
-                status: 'failed'
-            });
+            if (typeof cb === "function") {
+                cb(null);
+            }
         });
 };
 
@@ -47,13 +50,44 @@ export const askingForTrailer = (
     },
     tabId: number
 ) => {
+    const trailerFromCache = trailers().getTrailer(data.title);
+
+    if (trailerFromCache) {
+        return sendToClientTrailer(tabId, trailerFromCache);
+    }
+
     sendRequestToServer(
-        ASKING_FOR_TRAILER_TO_SERVER,
+        ASKING_FOR_TRAILER_FROM_SERVER,
         {
             title: data.title,
             itemId: data.itemId,
             lang: data?.lang
         },
-        (res: TrailerResponseFromServer) => sendToClientTrailer(tabId, res)
+        (res: any) => {
+            const data = (
+                res !== null ? {
+                    title: res.title,
+                    youtubeId: res.youtubeId,
+                    status: "successed"
+                } : {
+                    title: res.title,
+                    status: "failed"
+                }
+            ) as TrailerResponseFromServer;
+
+            sendToClientTrailer(tabId, data);
+        }
     );
 };
+
+export const getTrailersFromServer = async (data: LanguagesAndCountry):
+    Promise<TrailersInterface> => {
+
+    return new Promise((resolve) => {
+        sendRequestToServer(
+            TRAILERS_FROM_SERVER,
+            data,
+            resolve
+        );
+    });
+}

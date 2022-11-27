@@ -1,8 +1,12 @@
-import { ASKING_FOR_TRAILER_FROM_CLIENT } from "./actions";
+import {
+    ASKING_FOR_TRAILER_FROM_CLIENT,
+    GET_INIT
+} from "./actions";
 import { sendError } from "../handleError";
 import { askingForTrailer } from "./server";
+import clientInit from "../init/clientInit";
 
-class GetFromClient {
+export class GetFromClient {
     private static _instance: GetFromClient;
 
     private constructor() {
@@ -21,6 +25,9 @@ class GetFromClient {
                             },
                             sender.tab.id,
                         );
+                        break;
+                    case GET_INIT:
+                        clientInit(sender.tab.id);
                         break;
                 }
             } catch (error) {

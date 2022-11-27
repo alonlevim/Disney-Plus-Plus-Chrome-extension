@@ -1,3 +1,3 @@
-import getFromClient from "./networks/getFromClient";
+import init from "./init/init";
 
-getFromClient();
+init();
