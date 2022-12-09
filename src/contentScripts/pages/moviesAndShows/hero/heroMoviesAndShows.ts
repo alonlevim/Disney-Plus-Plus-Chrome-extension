@@ -149,23 +149,25 @@ class HeroMoviesAndShows extends HeroClass {
         const height = this.getVideoHeightShouldBe() ?? "100%";
         this.currentVideoHeight = height;
 
-        this.currentItem.youtube.getIframe().setAttribute('style', ON_START_TRAILER + `height: ${height};`)
+        // this.currentItem.youtube.getIframe().setAttribute('style', ON_START_TRAILER + `height: ${height};`)
+        this.currentItem.youtube.getIframe().setAttribute('style', "position: absolute; inset: 0; z-index:1; width: 100%; height: 100%;opacity: 1;");
         this.currentItem.btnUI.level_5.innerText = translate("Stop");
 
-        this.canChangeVideoHeight = false;
+        // this.canChangeVideoHeight = false;
+        this.canChangeVideoHeight = true;
 
-        setTimeout(() => {
-            this.currentItem.youtube.getIframe().setAttribute(
-                'style',
-                this.currentItem.youtube.getIframe().getAttribute('style')
-                    .replace(
-                        ON_START_ANIMATION_ENDED_TRAILER_1,
-                        ON_START_ANIMATION_ENDED_TRAILER_2
-                    )
-            );
+        // setTimeout(() => {
+        //     this.currentItem.youtube.getIframe().setAttribute(
+        //         'style',
+        //         this.currentItem.youtube.getIframe().getAttribute('style')
+        //             .replace(
+        //                 ON_START_ANIMATION_ENDED_TRAILER_1,
+        //                 ON_START_ANIMATION_ENDED_TRAILER_2
+        //             )
+        //     );
 
-            this.canChangeVideoHeight = true;
-        }, 400);
+        //     this.canChangeVideoHeight = true;
+        // }, 400);
     }
 
     protected onEndTrailer = (): void => {
