@@ -178,19 +178,20 @@ class HeroHomePage extends HeroClass {
     }
 
     protected onEnterTrailer = (): void => {
-        this.currentItem.youtube.getIframe().setAttribute('style', ON_START_TRAILER)
+        // this.currentItem.youtube.getIframe().setAttribute('style', ON_START_TRAILER)
+        this.currentItem.youtube.getIframe().setAttribute('style', "position: absolute; inset: 0; z-index:1; width: 100%; height: 100%;opacity: 1;");
         this.currentItem.btnUI.level_5.innerText = translate("Stop");
 
-        setTimeout(() => {
-            this.currentItem.youtube.getIframe().setAttribute(
-                'style',
-                this.currentItem.youtube.getIframe().getAttribute('style')
-                    .replace(
-                        ON_START_ANIMATION_ENDED_TRAILER_1,
-                        ON_START_ANIMATION_ENDED_TRAILER_2
-                    )
-            );
-        }, 400);
+        // setTimeout(() => {
+        //     this.currentItem.youtube.getIframe().setAttribute(
+        //         'style',
+        //         this.currentItem.youtube.getIframe().getAttribute('style')
+        //             .replace(
+        //                 ON_START_ANIMATION_ENDED_TRAILER_1,
+        //                 ON_START_ANIMATION_ENDED_TRAILER_2
+        //             )
+        //     );
+        // }, 400);
     }
 
     protected onEndTrailer = (): void => {
