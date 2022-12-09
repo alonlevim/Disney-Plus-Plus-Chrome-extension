@@ -1,0 +1,19 @@
+{
+    "DISNEY_PLUS_PLUS_EXTENSION": "Disney Plus Plus Extension",
+    "DESCRIPTION_EXTENSION": "Improve experience on Disney plus web application.",
+
+    "OPTIONS": "Options",
+
+    "TRAILERS": "Trailers",
+    "SHOW_TRAILER_ON_THE_BIG_CARD": "Show Trailer on the big card.",
+    "SUGGESTION_TO_SHOW_TRAILERS_ON_THE_HERO_HEADER_ON_THE_HOME_PAGE":"Suggestion to show trailers on the hero header on the home page.",
+    "SUGGESTION_TO_SHOW_TRAILER_ON_THE_HERO_HEADER_ON_THE_MOVIE_PAGE_AND_SHOW_PAGE": "Suggestion to show trailer on the hero header on the movie page and show page.",
+
+    "FULL_SCREEN": "Full Screen",
+    "ENABLE_FULLSCREEN_WHEN_DOUBLE_CLICK_ON_A_MOVIE_OR_SHOW_SCREEN": "Enable fullscreen when double click on a movie or show screen.",
+
+    "SAVE": "Save",
+    "SAVING": "Saving...",
+    "SUCCESSFULLY_SAVE": "Successfully save.",
+    "REPORT_A_PROBLEM": "Report a problem"
+}

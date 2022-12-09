@@ -10,3 +10,4 @@ export const GET_INIT = "init";
 
 // send to client
 export const ASKING_FOR_COUNTRY_AND_LANGUAGE = "asking-for-country-and-language";
+export const SEND_RULES_TO_CLIENT = "update-on-rules";

@@ -1,0 +1,19 @@
+{
+    "DISNEY_PLUS_PLUS_EXTENSION": "דיסני פלוס פלוס הרחבה",
+    "DESCRIPTION_EXTENSION": "משפר את חווית המשתמש באפליקצית דיסני פלוס.",
+
+    "OPTIONS": "אפשרויות",
+
+    "TRAILERS": "טריילרים",
+    "SHOW_TRAILER_ON_THE_BIG_CARD": "הצג טריילר על כרטיס גדול.",
+    "SUGGESTION_TO_SHOW_TRAILERS_ON_THE_HERO_HEADER_ON_THE_HOME_PAGE":"הצעה להציג טריילרים בכותרת הגיבור בעמוד הבית.",
+    "SUGGESTION_TO_SHOW_TRAILER_ON_THE_HERO_HEADER_ON_THE_MOVIE_PAGE_AND_SHOW_PAGE": "הצעה להציג טריילר בכותרת הגיבור בעמוד הסרט ובעמוד התוכנית.",
+
+    "FULL_SCREEN": "מסך מלא",
+    "ENABLE_FULLSCREEN_WHEN_DOUBLE_CLICK_ON_A_MOVIE_OR_SHOW_SCREEN": "אפשר מסך מלא בלחיצה פעמיים על מסך הסרט או סדרה.",
+
+    "SAVE": "שמירה",
+    "SAVING": "שומר...",
+    "SUCCESSFULLY_SAVE": "נשמר בהצלחה.",
+    "REPORT_A_PROBLEM": "דיווח על בעיה"
+}

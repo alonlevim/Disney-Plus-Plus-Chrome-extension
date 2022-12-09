@@ -47,7 +47,7 @@ module.exports = (env, argv) => ({
       }),
    ],
 
-   watch: argv.mode === "development",
+   watch: false,
 
    watchOptions: {
       poll: true,

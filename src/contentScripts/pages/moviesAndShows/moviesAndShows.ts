@@ -1,3 +1,5 @@
+import { FULLSCREEN_MOVIE_AND_SHOW, TRAILER_ON_THE_HERO_MOVIE_AND_SHOW_PAGE } from "../../../storage.constant";
+import rules from "../../rules";
 import getPageAndCountry from "../../utils/getPageAndCountry";
 import { catchError } from "../../utils/handleError";
 import log from "../../utils/log";
@@ -11,6 +13,7 @@ export class MoviesAndShows implements Page {
     private static _instance: MoviesAndShows;
     private setupDoubleClickListener = false;
     private hero = HeroMoviesAndShows();
+    private rules = rules();
 
     public static get Instance(): MoviesAndShows {
         return this._instance || (this._instance = new this());
@@ -33,9 +36,24 @@ export class MoviesAndShows implements Page {
                 !this.setupDoubleClickListener
                 &&
                 document.querySelector(PATH_DOUBLE_CLICK)
+                &&
+                this.rules.isTheRuleValid(FULLSCREEN_MOVIE_AND_SHOW)
             ) {
                 this.setupDoubleClickListener = true;
                 this.enableDoubleClickOnMovieOrShowsScreen();
+            }
+            // when disable fullscreen by option page.
+            else if (
+                (pageAndCountry.page === MOVIES || pageAndCountry.page === SHOWS)
+                &&
+                pageAndCountry.watching
+                &&
+                this.setupDoubleClickListener
+                &&
+                !this.rules.isTheRuleValid(FULLSCREEN_MOVIE_AND_SHOW)
+            ) {
+                this.setupDoubleClickListener = false;
+                this.disableDoubleClickOnMoviesOrShowsScreen();
             }
         } catch (error) {
             catchError(error);
@@ -43,7 +61,9 @@ export class MoviesAndShows implements Page {
 
         // Hero
         try {
-            this.hero.update();
+            if (this.rules.isTheRuleValid(TRAILER_ON_THE_HERO_MOVIE_AND_SHOW_PAGE)) {
+                this.hero.update();
+            }
         } catch (error) {
             catchError(error);
         }
@@ -84,7 +104,7 @@ export class MoviesAndShows implements Page {
     public dispose = (): void => {
         log('dispose MoviesAndShows');
         this.hero.dispose();
-        
+
         try {
             if (this.setupDoubleClickListener) {
                 this.disableDoubleClickOnMoviesOrShowsScreen();

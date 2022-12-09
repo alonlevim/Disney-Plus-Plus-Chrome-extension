@@ -8,6 +8,7 @@ import clientInit from "../init/clientInit";
 
 export class GetFromClient {
     private static _instance: GetFromClient;
+    private lastTabId: number;
 
     private constructor() {
         chrome.runtime.onMessage.addListener(async (
@@ -15,6 +16,8 @@ export class GetFromClient {
             sender: chrome.runtime.MessageSender
         ) => {
             try {
+                this.lastTabId = sender.tab.id;
+
                 switch (message?.message) {
                     case ASKING_FOR_TRAILER_FROM_CLIENT:
                         askingForTrailer(
@@ -39,6 +42,9 @@ export class GetFromClient {
     public static get Instance(): GetFromClient {
         return this._instance || (this._instance = new this());
     }
+
+    public getLastTabId = (): number => this.lastTabId;
+    
 }
 
 export default () => GetFromClient.Instance;
