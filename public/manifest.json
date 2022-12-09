@@ -9,6 +9,13 @@
         "48": "icons/icon48.png",
         "128": "icons/icon128.png"
     },
+    "action": {
+        "default_title": "Disney Plus Plus",
+        "default_popup": "popup.html"
+    },
+    "content_security_policy": {
+        "extension_pages": "script-src 'self'; object-src 'self';"
+    },
     "background": {
         "service_worker": "serviceWorker.js"
     },

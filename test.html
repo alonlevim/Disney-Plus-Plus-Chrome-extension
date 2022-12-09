@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #screen {
+            width: 400px;
+            height: 300px;
+            background-color: black;
+            position: relative;
+        }
+
+        @keyframes enterBigTrailer {
+            from {
+                clip-path: ellipse(0% 0% at 0% 100%);
+                opacity: 0;
+            }
+            to {
+                clip-path: ellipse(200% 200% at 0% 100%);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="screen">
+
+    </div>
+    <button id="btn">Trailer</button>
+
+    <script>
+        const screen = document.getElementById("screen");
+
+        document.getElementById("btn").addEventListener("click", handleClick);
+
+        function handleClick(e) {
+            e.preventDefault();
+
+            const newDiv = document.createElement("div");
+            newDiv.setAttribute('style', 'position: absolute; inset: 0; background-color: red; width: 100%; height: 100%; clip-path: ellipse(0% 0% at 0% 100%); opacity: 0; animation: enterBigTrailer 0.5s 1 ease-out;');
+
+            setTimeout(function() {
+                newDiv.setAttribute('style', newDiv.getAttribute('style').replace('clip-path: ellipse(0% 0% at 0% 100%); opacity: 0;', 'opacity: 1;'))
+            }, 500);
+
+            screen.appendChild(newDiv);
+        }
+
+    </script>
+</body>
+</html>
