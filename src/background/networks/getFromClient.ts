@@ -1,9 +1,11 @@
 import {
     ASKING_FOR_TRAILER_FROM_CLIENT,
-    GET_INIT
+    GET_INIT,
+    RESPONSE_ON_REPORT_TO_OPTIONS,
+    SEND_REPORT_FROM_OPTIONS
 } from "./actions";
 import { sendError } from "../handleError";
-import { askingForTrailer } from "./server";
+import { askingForTrailer, sendReportToServer } from "./server";
 import clientInit from "../init/clientInit";
 
 export class GetFromClient {
@@ -32,6 +34,20 @@ export class GetFromClient {
                     case GET_INIT:
                         clientInit(sender.tab.id);
                         break;
+                    case SEND_REPORT_FROM_OPTIONS:
+                        // eslint-disable-next-line no-case-declarations
+                        let succeeded = false;
+
+                        sendReportToServer(message.data)
+                            .then(() => succeeded = true)
+                            .catch(() => succeeded = false)
+                            .finally(() => {
+                                chrome.runtime.sendMessage({
+                                    message: RESPONSE_ON_REPORT_TO_OPTIONS,
+                                    status: succeeded
+                                });
+                            });
+                        break;
                 }
             } catch (error) {
                 sendError(error);
@@ -44,7 +60,7 @@ export class GetFromClient {
     }
 
     public getLastTabId = (): number => this.lastTabId;
-    
+
 }
 
 export default () => GetFromClient.Instance;

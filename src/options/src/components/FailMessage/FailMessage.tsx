@@ -2,9 +2,9 @@ import clsx from "clsx";
 import { motion, AnimatePresence } from "framer-motion";
 import { FunctionComponent, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import SuccessMessageProps from "./SuccessMessage.interface";
+import FailMessageProps from "./FailMessage.interface";
 
-const SuccessMessage: FunctionComponent<SuccessMessageProps> = (props) => {
+const FailMessage: FunctionComponent<FailMessageProps> = (props) => {
   const { show, text, onClose, time, bg, darkBg } = props;
   const { i18n } = useTranslation();
   const isRtl = i18n.dir() === "rtl";
@@ -27,7 +27,7 @@ const SuccessMessage: FunctionComponent<SuccessMessageProps> = (props) => {
     <AnimatePresence>
       {show && (
         <motion.div
-          id="toast-success"
+          id="toast-fail"
           className={clsx(
             "flex",
             "items-center",
@@ -50,7 +50,7 @@ const SuccessMessage: FunctionComponent<SuccessMessageProps> = (props) => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0 }}
         >
-          <div className="inline-flex flex-shrink-0 justify-center items-center w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
+          <div className="inline-flex flex-shrink-0 justify-center items-center w-8 h-8 text-rose-500 bg-white rounded-lg dark:bg-rose-800 dark:text-rose-200">
             <svg
               aria-hidden="true"
               className="w-5 h-5"
@@ -59,9 +59,9 @@ const SuccessMessage: FunctionComponent<SuccessMessageProps> = (props) => {
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                fillRule="evenodd"
-                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                clipRule="evenodd"
+                fill-rule="evenodd"
+                d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                clip-rule="evenodd"
               ></path>
             </svg>
             <span className="sr-only">Check icon</span>
@@ -93,7 +93,7 @@ const SuccessMessage: FunctionComponent<SuccessMessageProps> = (props) => {
               "dark:bg-gray-800",
               "dark:hover:bg-gray-700"
             )}
-            data-dismiss-target="#toast-success"
+            data-dismiss-target="#toast-fail"
             aria-label="Close"
             onClick={handleClose}
           >
@@ -118,10 +118,10 @@ const SuccessMessage: FunctionComponent<SuccessMessageProps> = (props) => {
   );
 };
 
-SuccessMessage.defaultProps = {
+FailMessage.defaultProps = {
   time: 4000,
-  bg: "bg-white",
-  darkBg: "dark:bg-gray-800"
+  bg: "bg-rose-50",
+  darkBg: "dark:bg-rose-800",
 };
 
-export default SuccessMessage;
+export default FailMessage;

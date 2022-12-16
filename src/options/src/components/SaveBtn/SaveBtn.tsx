@@ -1,13 +1,17 @@
 import clsx from "clsx";
 import { FunctionComponent } from "react";
+import { useTranslation } from "react-i18next";
 import SaveBtnProps from "./SaveBtn.interface";
 
 const SaveBtn: FunctionComponent<SaveBtnProps> = (props) => {
-  const { label, loading, textLoading, disabled, onClick, rtl } = props;
+  const { label, loading, textLoading, disabled, onClick, type } = props;
+  const { i18n } = useTranslation();
+  const isRtl = i18n.dir() === "rtl";
+
   return (
     <button
       disabled={disabled}
-      type="button"
+      type={type}
       className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center"
       onClick={onClick}
     >
@@ -17,7 +21,7 @@ const SaveBtn: FunctionComponent<SaveBtnProps> = (props) => {
           role="status"
           className={clsx(
             "inline",
-            rtl ? "ml-3" : "mr-3",
+            isRtl ? "ml-3" : "mr-3",
             "w-4",
             "h-4",
             "text-white",
@@ -43,7 +47,7 @@ const SaveBtn: FunctionComponent<SaveBtnProps> = (props) => {
 };
 
 SaveBtn.defaultProps = {
-  rtl: false,
+  type: "button",
 };
 
 export default SaveBtn;

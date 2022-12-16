@@ -3,6 +3,6 @@ export default interface SaveBtnProps {
     loading?: boolean;
     textLoading: string;
     disabled?: boolean;
-    rtl?: boolean;
+    type?: 'button' | 'submit';
     onClick?: () => void;
 }

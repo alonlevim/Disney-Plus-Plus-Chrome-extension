@@ -1,4 +1,4 @@
-export default interface SuccessMessageProps {
+export default interface FailMessageProps {
     show?: boolean;
     text: string;
     time?: number;

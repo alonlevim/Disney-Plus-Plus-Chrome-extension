@@ -15,5 +15,24 @@
     "SAVE": "שמירה",
     "SAVING": "שומר...",
     "SUCCESSFULLY_SAVE": "נשמר בהצלחה.",
-    "REPORT_A_PROBLEM": "דיווח על בעיה"
+    "REPORT_A_PROBLEM": "דיווח על בעיה",
+    
+    "REPORT": "דיווח",
+    "FULL_NAME": "שם מלא",
+    "EMAIL_ADDRESS": "דואר אלקטרוני",
+    "SUBJECT": "נושא",
+    "PROBLEM_WITH_TRAILER": "בעיה עם טריילר",
+    "THERE_IS_A_BUG": "יש באג",
+    "I_HAVE_A_SUGGESTION": "יש לי הצעה",
+    "ERROR_IN_TRANSLATION": "טעות בתרגום",
+    "OTHER": "אחר",
+    "MESSAGE": "הודעה",
+    "SEND": "שליחה",
+    "LOADING": "טוען",
+    "FULLNAME_IS_A_REQUIRED_FIELD": "שם מלא הוא שדה חובה",
+    "EMAIL_IS_A_REQUIRED_FIELD": "דואר אלקטרוני הוא שדה חובה",
+    "SUBJECT_IS_A_REQUIRED_FIELD": "נושא הוא שדה חובה",
+    "MESSAGE_IS_A_REQUIRED_FIELD": "הודעה הוא שדה חובה",
+    "EMAIL_MUST_BE_A_VALID_EMAIL": "דואר אלקטרוני לא תקין",
+    "THANK_YOU_MESSAGE_RECEIVED_I_WILL_DO_MY_BEST_TO_ANSWER_AS_SOON_AS_POSSIBLE": "תודה לך, קיבלתי את הודעתך. אעשה כמיטב יכולתי לענות בהקדם האפשרי.    "
 }

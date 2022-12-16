@@ -13,9 +13,11 @@ import {
 } from "../../storage.constant";
 import FullScreen from "./FullScreen";
 import Trailers from "./Trailers";
+import { useNavigate } from "react-router-dom";
 
 const Main = () => {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
 
   const _isRtl = isRtl(i18n);
 
@@ -122,16 +124,18 @@ const Main = () => {
           textLoading={t("SAVING")}
           onClick={onSave}
           loading={saving}
-          rtl={_isRtl}
         />
-        <OutlineBtn color="red" label={t("REPORT_A_PROBLEM")} />
+        <OutlineBtn
+          color="red"
+          label={t("REPORT_A_PROBLEM")}
+          onClick={() => navigate("/options/index.html?page=report")}
+        />
       </div>
 
       <SuccessMessage
         show={successMessage}
         text={t("SUCCESSFULLY_SAVE")}
         onClose={setSuccessMessage}
-        rtl={_isRtl}
       />
     </main>
   );

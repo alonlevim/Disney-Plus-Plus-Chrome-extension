@@ -3,9 +3,10 @@ import trailers from "../trailers/trailers";
 import { TrailersInterface } from "../trailers/trailers.interface";
 import {
     ASKING_FOR_TRAILER_FROM_SERVER,
+    REPORT_TO_SERVER,
     TRAILERS_FROM_SERVER
 } from "./actions";
-import { Languages, LanguagesAndCountry } from "./server.interface";
+import { Languages, LanguagesAndCountry, Report, ReportResponse } from "./server.interface";
 import { sendToClientTrailer } from "./toClient";
 import { TrailerResponseFromServer } from "./TrailerResponseFromServer.interface";
 
@@ -14,7 +15,8 @@ const { SERVER_URL } = process.env;
 export const sendRequestToServer = async (
     action: string,
     data: any,
-    cb?: (res: any) => void
+    cb?: (res: any) => void,
+    failedCb?: (res: any) => void,
 ): Promise<void> => {
     data.version = await getVersion();
 
@@ -36,7 +38,10 @@ export const sendRequestToServer = async (
         })
         .catch((err) => {
             console.error(err);
-            if (typeof cb === "function") {
+            if( typeof failedCb === "function" ) {
+                failedCb(err);
+            }
+            else if (typeof cb === "function") {
                 cb(null);
             }
         });
@@ -92,6 +97,19 @@ export const getTrailersFromServer = async (data: LanguagesAndCountry):
             TRAILERS_FROM_SERVER,
             data,
             resolve
+        );
+    });
+}
+
+export const sendReportToServer = async (data: Report):
+    Promise<ReportResponse> => {
+
+    return new Promise((resolve, reject) => {
+        sendRequestToServer(
+            REPORT_TO_SERVER,
+            data,
+            resolve,
+            reject
         );
     });
 }

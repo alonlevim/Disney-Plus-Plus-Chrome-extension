@@ -15,5 +15,24 @@
     "SAVE": "Save",
     "SAVING": "Saving...",
     "SUCCESSFULLY_SAVE": "Successfully save.",
-    "REPORT_A_PROBLEM": "Report a problem"
+    "REPORT_A_PROBLEM": "Report a problem",
+
+    "REPORT": "Report",
+    "FULL_NAME": "Full Name",
+    "EMAIL_ADDRESS": "Email Address",
+    "SUBJECT": "Subject",
+    "PROBLEM_WITH_TRAILER": "Problem With Trailer",
+    "THERE_IS_A_BUG": "There Is A Bug",
+    "I_HAVE_A_SUGGESTION": "I Have A Suggestion",
+    "ERROR_IN_TRANSLATION": "Error In Translation",
+    "OTHER": "Other",
+    "MESSAGE": "Message",
+    "SEND": "Send",
+    "LOADING": "Loading",
+    "FULLNAME_IS_A_REQUIRED_FIELD": "Full Name is a required field",
+    "EMAIL_IS_A_REQUIRED_FIELD": "Email is a required field",
+    "SUBJECT_IS_A_REQUIRED_FIELD": "Subject is a required field",
+    "MESSAGE_IS_A_REQUIRED_FIELD": "Message is a required field",
+    "EMAIL_MUST_BE_A_VALID_EMAIL": "Email must be a valid email",
+    "THANK_YOU_MESSAGE_RECEIVED_I_WILL_DO_MY_BEST_TO_ANSWER_AS_SOON_AS_POSSIBLE": "Thank you, I received your message. I will do my best to answer as soon as possible."
 }

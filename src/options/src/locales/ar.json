@@ -15,5 +15,24 @@
     "SAVE": "حفظ",
     "SAVING": "حفظ...",
     "SUCCESSFULLY_SAVE": "تم الحفظ بنجاح.",
-    "REPORT_A_PROBLEM": "الإبلاغ عن مشكلة"
+    "REPORT_A_PROBLEM": "الإبلاغ عن مشكلة",
+
+    "REPORT": "تقرير",
+    "FULL_NAME": "الاسم الكامل",
+    "EMAIL_ADDRESS": "عنوان البريد الالكترونى",
+    "SUBJECT": "موضوعات",
+    "PROBLEM_WITH_TRAILER": "مشكلة في مقطورة",
+    "THERE_IS_A_BUG": "هناك خلل",
+    "I_HAVE_A_SUGGESTION": "لدي اقتراح",
+    "ERROR_IN_TRANSLATION": "خطأ في الترجمة",
+    "OTHER": "آخر",
+    "MESSAGE": "رسالة",
+    "SEND": "إرسال",
+    "LOADING": "جار التحميل",
+    "FULLNAME_IS_A_REQUIRED_FIELD": "الاسم الكامل هو حقل مطلوب",
+    "EMAIL_IS_A_REQUIRED_FIELD": "إن البريد الإلكترونى حقل مطلوب",
+    "SUBJECT_IS_A_REQUIRED_FIELD": "الموضوع هو حقل مطلوب",
+    "MESSAGE_IS_A_REQUIRED_FIELD": "الرسالة هي حقل مطلوب",
+    "EMAIL_MUST_BE_A_VALID_EMAIL": "يجب أن يكون البريد الإلكتروني بريدًا إلكترونيًا صالحًا",
+    "THANK_YOU_MESSAGE_RECEIVED_I_WILL_DO_MY_BEST_TO_ANSWER_AS_SOON_AS_POSSIBLE": "شكرا لك لقد تلقيت رسالتك. سأبذل قصارى جهدي للإجابة في أقرب وقت ممكن."
 }
