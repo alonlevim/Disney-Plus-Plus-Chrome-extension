@@ -1,6 +1,6 @@
 import * as storageConstant from "../storage.constant";
 
-const storageConstantKeys = Object.keys(storageConstant);
+const storageConstantKeys = Object.values(storageConstant);
 
 const getFlags = () =>
   new Promise((resolve, reject) => {

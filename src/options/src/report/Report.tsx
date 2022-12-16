@@ -29,7 +29,9 @@ export const Reports: FC<{}> = () => {
 
   useLayoutEffect(() => {
     getFlags()
-      .then((flags: any) => (initialValues.flags = JSON.stringify(flags)))
+      .then((flags: any) => {
+        initialValues.flags = JSON.stringify(flags);
+      })
       .catch(() => null);
   }, []);
 

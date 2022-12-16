@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import OutlineBtn from "../../components/OutlineBtn/OutlineBtn";
 import SaveBtn from "../../components/SaveBtn/SaveBtn";
@@ -56,7 +56,7 @@ const Main = () => {
     });
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     chrome.storage?.sync
       ?.get([
         TRAILER_ON_THE_BIG_CARD,
