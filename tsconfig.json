@@ -4,5 +4,6 @@
         "target": "ES5",
         "module": "ESNext",
         "allowSyntheticDefaultImports": true
-    }
+    },
+    "exclude": ["src/options"]
 }

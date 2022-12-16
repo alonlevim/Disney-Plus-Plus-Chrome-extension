@@ -23,7 +23,7 @@ To initialize this project, create `development.env` and `production.env` files 
 To Build this project run
 
 ```bash
-  npm run build
+  npm run build:all
 ```
 
 

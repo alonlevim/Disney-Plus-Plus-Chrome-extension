@@ -1,0 +1,39 @@
+{
+    "DISNEY_PLUS_PLUS_EXTENSION": "Disney Plus Plus Extension",
+    "DESCRIPTION_EXTENSION": "Improve experience on Disney plus web application.",
+
+    "OPTIONS": "Options",
+
+    "TRAILERS": "Trailers",
+    "SHOW_TRAILER_ON_THE_BIG_CARD": "Show Trailer on the big card.",
+    "SUGGESTION_TO_SHOW_TRAILERS_ON_THE_HERO_HEADER_ON_THE_HOME_PAGE":"Suggestion to show trailers on the hero header on the home page.",
+    "SUGGESTION_TO_SHOW_TRAILER_ON_THE_HERO_HEADER_ON_THE_MOVIE_PAGE_AND_SHOW_PAGE": "Suggestion to show trailer on the hero header on the movie page and show page.",
+
+    "FULL_SCREEN": "Full Screen",
+    "ENABLE_FULLSCREEN_WHEN_DOUBLE_CLICK_ON_A_MOVIE_OR_SHOW_SCREEN": "Enable fullscreen when double click on a movie or show screen.",
+
+    "SAVE": "Save",
+    "SAVING": "Saving...",
+    "SUCCESSFULLY_SAVE": "Successfully save.",
+    "REPORT_A_PROBLEM": "Report a problem",
+
+    "REPORT": "Report",
+    "FULL_NAME": "Full Name",
+    "EMAIL_ADDRESS": "Email Address",
+    "SUBJECT": "Subject",
+    "PROBLEM_WITH_TRAILER": "Problem With Trailer",
+    "THERE_IS_A_BUG": "There Is A Bug",
+    "I_HAVE_A_SUGGESTION": "I Have A Suggestion",
+    "ERROR_IN_TRANSLATION": "Error In Translation",
+    "OTHER": "Other",
+    "MESSAGE": "Message",
+    "SEND": "Send",
+    "LOADING": "Loading",
+    "FULLNAME_IS_A_REQUIRED_FIELD": "Full Name is a required field",
+    "EMAIL_IS_A_REQUIRED_FIELD": "Email is a required field",
+    "SUBJECT_IS_A_REQUIRED_FIELD": "Subject is a required field",
+    "MESSAGE_IS_A_REQUIRED_FIELD": "Message is a required field",
+    "EMAIL_MUST_BE_A_VALID_EMAIL": "Email must be a valid email",
+    "THANK_YOU_MESSAGE_RECEIVED_I_WILL_DO_MY_BEST_TO_ANSWER_AS_SOON_AS_POSSIBLE": "Thank you, I received your message. I will do my best to answer as soon as possible.",
+    "THE_MESSAGE_IS_TEMPORARILY_UNABLE_TO_BE_SENT": "The message is temporarily unable to be sent."
+}

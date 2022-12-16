@@ -1,0 +1,39 @@
+{
+    "DISNEY_PLUS_PLUS_EXTENSION": "امتداد ديزني بلس بلس",
+    "DESCRIPTION_EXTENSION": "تحسين التجربة على تطبيق ويب ديزني بلس.",
+
+    "OPTIONS": "خيارات",
+
+    "TRAILERS": "المقطورات",
+    "SHOW_TRAILER_ON_THE_BIG_CARD": "عرض المقطع الدعائي على البطاقة الكبيرة.",
+    "SUGGESTION_TO_SHOW_TRAILERS_ON_THE_HERO_HEADER_ON_THE_HOME_PAGE":"اقتراح لإظهار المقطورات على رأس البطل على الصفحة الرئيسية.",
+    "SUGGESTION_TO_SHOW_TRAILER_ON_THE_HERO_HEADER_ON_THE_MOVIE_PAGE_AND_SHOW_PAGE": "اقتراح لإظهار المقطع الدعائي على رأس البطل على صفحة الفيلم وصفحة العرض.",
+
+    "FULL_SCREEN": "شاشة كاملة",
+    "ENABLE_FULLSCREEN_WHEN_DOUBLE_CLICK_ON_A_MOVIE_OR_SHOW_SCREEN": "قم بتمكين وضع ملء الشاشة عند النقر المزدوج على فيلم أو شاشة عرض.",
+
+    "SAVE": "حفظ",
+    "SAVING": "حفظ...",
+    "SUCCESSFULLY_SAVE": "تم الحفظ بنجاح.",
+    "REPORT_A_PROBLEM": "الإبلاغ عن مشكلة",
+
+    "REPORT": "تقرير",
+    "FULL_NAME": "الاسم الكامل",
+    "EMAIL_ADDRESS": "عنوان البريد الالكترونى",
+    "SUBJECT": "موضوعات",
+    "PROBLEM_WITH_TRAILER": "مشكلة في مقطورة",
+    "THERE_IS_A_BUG": "هناك خلل",
+    "I_HAVE_A_SUGGESTION": "لدي اقتراح",
+    "ERROR_IN_TRANSLATION": "خطأ في الترجمة",
+    "OTHER": "آخر",
+    "MESSAGE": "رسالة",
+    "SEND": "إرسال",
+    "LOADING": "جار التحميل",
+    "FULLNAME_IS_A_REQUIRED_FIELD": "الاسم الكامل هو حقل مطلوب",
+    "EMAIL_IS_A_REQUIRED_FIELD": "إن البريد الإلكترونى حقل مطلوب",
+    "SUBJECT_IS_A_REQUIRED_FIELD": "الموضوع هو حقل مطلوب",
+    "MESSAGE_IS_A_REQUIRED_FIELD": "الرسالة هي حقل مطلوب",
+    "EMAIL_MUST_BE_A_VALID_EMAIL": "يجب أن يكون البريد الإلكتروني بريدًا إلكترونيًا صالحًا",
+    "THANK_YOU_MESSAGE_RECEIVED_I_WILL_DO_MY_BEST_TO_ANSWER_AS_SOON_AS_POSSIBLE": "شكرا لك لقد تلقيت رسالتك. سأبذل قصارى جهدي للإجابة في أقرب وقت ممكن.",
+    "THE_MESSAGE_IS_TEMPORARILY_UNABLE_TO_BE_SENT": "لا يمكن إرسال الرسالة مؤقتًا."
+}

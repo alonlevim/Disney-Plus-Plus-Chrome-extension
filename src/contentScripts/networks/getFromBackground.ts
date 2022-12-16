@@ -1,3 +1,4 @@
+import rules from "../rules";
 import { getAudioLang, getSubtitleLang, getUILang, isRtl } from "../utils/getLanguage";
 import getPageAndCountry from "../utils/getPageAndCountry";
 import { catchError } from "../utils/handleError";
@@ -6,13 +7,15 @@ import { TrailerResponseFromServer } from "../utils/trailers/TrailerResponseFrom
 import trailers from "../utils/trailers/trailers";
 import {
     ASKING_FOR_COUNTRY_AND_LANGUAGE,
-    RESPONSE_ABOUT_TRAILER
+    RESPONSE_ABOUT_TRAILER,
+    UPDATE_ON_RULES
 } from "./actions";
 import { LanguagesAndCountry } from "./server.interface";
 
 class GetFromBackground {
     private static _instance: GetFromBackground;
     private trailers = trailers();
+    private rules = rules();
 
     private constructor() {
         chrome.runtime.onMessage.addListener((
@@ -27,6 +30,9 @@ class GetFromBackground {
                         break;
                     case ASKING_FOR_COUNTRY_AND_LANGUAGE:
                         this.sendCountryAndLanguage(sendResponse);
+                        break;
+                    case UPDATE_ON_RULES:
+                        this.rules.updateRules(message.rules);
                         break;
                 }
             } catch (error) {

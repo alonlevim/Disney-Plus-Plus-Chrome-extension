@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack --mode=development",
-    "build": "webpack --mode=production"
+    "build:ext": "webpack --mode=production",
+    "build:options": "cd src/options && npm run build && cd ../../dist && rm -rf options && cp -R ../public/options ./",
+    "build:all": "npm run build:options && npm run build:ext"
   },
   "keywords": [],
   "author": "",

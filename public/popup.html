@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disney Plus Plus</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet" />
+    <style>
+        body, div {
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #ededed;
+            padding: 10px;
+            margin: 0;
+            font-family: 'Open Sans', sans-serif;
+            /* max-width: 360px;
+            max-height: 372.5px; */
+            /* overflow-y: auto; */
+            width: 100%;
+            min-width: 360px;
+            max-width: 360px;
+        }
+
+        .bg {
+            background-color: #f5f6f7;
+            padding: 10px;
+            border-radius: 20px;
+            width: 100%;
+            box-shadow: 0 0 10px rgb(0 0 0 / 15%);
+        }
+
+        .settings {
+            width: 25px;
+            height: 25px;
+            position: relative;
+            inset: 0 0 0 calc(100% - 25px);
+            cursor: pointer;
+        }
+
+        h1 {
+            font-weight: 100;
+            text-align: center;
+            padding: 0 40px;
+            line-height: 34px;
+            margin: 0 0 10px;
+            font-size: 26px;
+        }
+
+        h2 {
+            font-weight: 400;
+            margin: 20px 0 0 0;
+            font-size: 19px;
+        }
+
+        .video {
+            padding-inline-start: 10px;
+            padding-inline-start: 5px;
+            width: 100%;
+        }
+
+        .dots {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            justify-content: center;
+            margin: 10px 0;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #bdb7ab;
+            cursor: pointer;
+        }
+        .dot.active, .dot:hover {
+            background-color: #fcba31;
+        }
+
+        .group {
+            animation: enter 1s ease-out;
+            display: none;
+        }
+
+        .group.active {
+            display: block;
+        }
+
+        @keyframes enter {
+            from {
+                clip-path: circle(0%);
+            }
+            to {
+                clip-path: circle(100%);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg">
+        <a target="_blank" href="/options/index.html?page=options">
+            <img class="settings" src="./assets/settings.svg" />
+        </a>
+    
+        <h1 id="benefites-title">What the benefites
+            of this extention?</h1>
+            
+        <div class="group group-1">
+            <h2 id="group-1-title">Show Trailers on Header</h2>
+        
+            <img class="video" src="./assets/screen_1.gif" />
+        </div>
+
+        <div class="group group-2">
+            <h2 id="group-2-title">Show Trailer on Card</h2>
+        
+            <img class="video" src="./assets/screen_2.gif" />
+        </div>
+
+        <div class="group group-3">
+            <h2 id="group-3-title">Double click for Full Screen</h2>
+        
+            <img class="video" src="./assets/screen_3.gif" />
+        </div>
+
+        <div class="dots">
+            <div class="dot active" data-index="0"></div>
+            <div class="dot" data-index="1"></div>
+            <div class="dot" data-index="2"></div>
+        </div>
+    </div>
+
+    <script src="./popup.js"></script>
+</body>
+
+</html>

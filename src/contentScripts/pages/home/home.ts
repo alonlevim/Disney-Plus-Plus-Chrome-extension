@@ -1,3 +1,5 @@
+import { TRAILERS_ON_THE_HERO_HOMEPAGE, TRAILER_ON_THE_BIG_CARD } from "../../../storage.constant";
+import rules from "../../rules";
 import log from "../../utils/log";
 import { Page } from "../page.interface";
 import BigCard from "./bigCard";
@@ -8,6 +10,7 @@ export class Home implements Page {
 
     private bigCard = BigCard();
     private heroHomePage = HeroHomePage();
+    private rules = rules();
 
     public static get Instance(): Home {
         return this._instance || (this._instance = new this());
@@ -20,8 +23,13 @@ export class Home implements Page {
     }
 
     update = (): void => {
-        this.bigCard.update();
-        this.heroHomePage.update();
+        if( this.rules.isTheRuleValid(TRAILER_ON_THE_BIG_CARD) ) {
+            this.bigCard.update();
+        }
+
+        if( this.rules.isTheRuleValid(TRAILERS_ON_THE_HERO_HOMEPAGE) ) {
+            this.heroHomePage.update();
+        }
     }
 
     dispose = (): void => {
