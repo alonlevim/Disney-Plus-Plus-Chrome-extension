@@ -34,5 +34,6 @@
     "SUBJECT_IS_A_REQUIRED_FIELD": "الموضوع هو حقل مطلوب",
     "MESSAGE_IS_A_REQUIRED_FIELD": "الرسالة هي حقل مطلوب",
     "EMAIL_MUST_BE_A_VALID_EMAIL": "يجب أن يكون البريد الإلكتروني بريدًا إلكترونيًا صالحًا",
-    "THANK_YOU_MESSAGE_RECEIVED_I_WILL_DO_MY_BEST_TO_ANSWER_AS_SOON_AS_POSSIBLE": "شكرا لك لقد تلقيت رسالتك. سأبذل قصارى جهدي للإجابة في أقرب وقت ممكن."
+    "THANK_YOU_MESSAGE_RECEIVED_I_WILL_DO_MY_BEST_TO_ANSWER_AS_SOON_AS_POSSIBLE": "شكرا لك لقد تلقيت رسالتك. سأبذل قصارى جهدي للإجابة في أقرب وقت ممكن.",
+    "THE_MESSAGE_IS_TEMPORARILY_UNABLE_TO_BE_SENT": "لا يمكن إرسال الرسالة مؤقتًا."
 }

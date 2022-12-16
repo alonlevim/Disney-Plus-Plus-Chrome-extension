@@ -251,7 +251,7 @@ export const Reports: FC<{}> = () => {
 
       <FailMessage
         show={failMessage}
-        text={t("זמנית לא ניתן לשלוח את ההודעה")}
+        text={t("THE_MESSAGE_IS_TEMPORARILY_UNABLE_TO_BE_SENT")}
         time={8000}
         onClose={setFailMessage}
       />
