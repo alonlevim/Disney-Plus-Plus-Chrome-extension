@@ -29,6 +29,16 @@
             max-width: 360px;
         }
 
+        header {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .extenstion-title {
+            font-size: 16px;
+        }
+
         .bg {
             background-color: #f5f6f7;
             padding: 10px;
@@ -107,9 +117,13 @@
 
 <body>
     <div class="bg">
-        <a target="_blank" href="/options/index.html?page=options">
-            <img class="settings" src="./assets/settings.svg" />
-        </a>
+        <header>
+            <div></div>
+            <h1 class="extenstion-title">Disney Plus Plus</h1>
+            <a class="settings-link" target="_blank" href="/options/index.html?page=options">
+                <img class="settings" src="./assets/settings.svg" />
+            </a>
+        </header>
     
         <h1 id="benefites-title">What the benefites
             of this extention?</h1>

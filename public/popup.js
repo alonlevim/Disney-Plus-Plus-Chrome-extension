@@ -103,6 +103,7 @@ const en = {
     "SHOW_TRAILER_ON_CARD": "Show Trailer on Card",
     "DOUBLE_CLICK_FOR_FULL_SCREEN": "Double click for Full Screen",
     "SETTINGS": "Settings",
+    "DISNEY_PLUS_PLUS_EXTENSION": "Disney Plus Plus Extension",
 };
 const ar = {
     "WHAT_THE_BENEFITES_OF_THIS_EXTENTION": "ما فوائد هذا التمديد؟",
@@ -110,6 +111,7 @@ const ar = {
     "SHOW_TRAILER_ON_CARD": "إظهار المقطع الدعائي على البطاقة",
     "DOUBLE_CLICK_FOR_FULL_SCREEN": "انقر نقرًا مزدوجًا للحصول على شاشة كاملة",
     "SETTINGS": "إعدادات",
+    "DISNEY_PLUS_PLUS_EXTENSION": "امتداد ديزني بلس بلس",
 };
 const he = {
     "WHAT_THE_BENEFITES_OF_THIS_EXTENTION": "מה היתרונות של הרחבה זו?",
@@ -117,6 +119,7 @@ const he = {
     "SHOW_TRAILER_ON_CARD": "הצג טריילר בכרטיס",
     "DOUBLE_CLICK_FOR_FULL_SCREEN": "לחיצה פעמיים למסך מלא",
     "SETTINGS": "הגדרות",
+    "DISNEY_PLUS_PLUS_EXTENSION": "דיסני פלוס פלוס הרחבה",
 };
 
 const dir = {
@@ -138,6 +141,8 @@ function translate(word) {
 }
 
 function translation() {
+    document.querySelector(".extenstion-title").innerText = translate("DISNEY_PLUS_PLUS_EXTENSION");
+
     document.getElementById("benefites-title").innerText = translate("WHAT_THE_BENEFITES_OF_THIS_EXTENTION");
     document.getElementById("group-1-title").innerText = translate("SHOW_TRAILERS_ON_HEADER");
     document.getElementById("group-2-title").innerText = translate("SHOW_TRAILER_ON_CARD");
