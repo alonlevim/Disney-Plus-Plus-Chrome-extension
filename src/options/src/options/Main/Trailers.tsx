@@ -1,5 +1,5 @@
-import React from "react";
-import { useTranslation } from 'react-i18next';
+import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import Switch from "../../components/Switch/Switch";
 import { isRtl } from "../../helper";
 
@@ -10,6 +10,7 @@ interface Props {
   setTrailersOnTheHeroHomepageFlag: (flag: boolean) => void;
   trailersOnTheHeroMovieAndShowPageFlag: boolean;
   setTrailersOnTheHeroMovieAndShowPageFlag: (flag: boolean) => void;
+  onChange: () => void;
 }
 
 const Trailers = (props: Props) => {
@@ -23,27 +24,37 @@ const Trailers = (props: Props) => {
     setTrailersOnTheHeroHomepageFlag,
     trailersOnTheHeroMovieAndShowPageFlag,
     setTrailersOnTheHeroMovieAndShowPageFlag,
+    onChange,
   } = props;
+
+  useEffect(() => {
+    onChange();
+  }, [
+    trailerOnTheBigCardFlag,
+    trailersOnTheHeroHomepageFlag,
+    trailersOnTheHeroMovieAndShowPageFlag,
+  ]);
+
   return (
     <React.Fragment>
-      <h3 className="text-base font-bold dark:text-white">{t('TRAILERS')}</h3>
+      <h3 className="text-base font-bold dark:text-white">{t("TRAILERS")}</h3>
 
       <Switch
-        label={t('SHOW_TRAILER_ON_THE_CARD')}
+        label={t("SHOW_TRAILER_ON_THE_CARD")}
         checked={trailerOnTheBigCardFlag}
         onChange={setTrailerOnTheBigCardFlag}
         rtl={_idRtl}
       />
 
       <Switch
-        label={t('SHOW_TRAILERS_AT_THE_TOP_OF_THE_PAGE_ON_THE_HOME_PAGE')}
+        label={t("SHOW_TRAILERS_AT_THE_TOP_OF_THE_PAGE_ON_THE_HOME_PAGE")}
         checked={trailersOnTheHeroHomepageFlag}
         onChange={setTrailersOnTheHeroHomepageFlag}
         rtl={_idRtl}
       />
 
       <Switch
-        label={t('SHOW_THE_TRAILER_AT_THE_TOP_OF_THE_MOVIE_PAGE')}
+        label={t("SHOW_THE_TRAILER_AT_THE_TOP_OF_THE_MOVIE_PAGE")}
         checked={trailersOnTheHeroMovieAndShowPageFlag}
         onChange={setTrailersOnTheHeroMovieAndShowPageFlag}
         rtl={_idRtl}

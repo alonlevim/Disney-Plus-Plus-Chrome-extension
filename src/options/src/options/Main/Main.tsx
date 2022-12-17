@@ -2,8 +2,6 @@ import clsx from "clsx";
 import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import OutlineBtn from "../../components/OutlineBtn/OutlineBtn";
-import SaveBtn from "../../components/SaveBtn/SaveBtn";
-import SuccessMessage from "../../components/SuccessMessage/SuccessMessage";
 import { isRtl } from "../../helper";
 import {
   FULLSCREEN_MOVIE_AND_SHOW,
@@ -23,7 +21,6 @@ const Main = () => {
 
   const [fullscreenMovieAndShowFlag, setFullscreenMovieAndShowFlag] =
     useState(false);
-
   const [trailerOnTheBigCardFlag, setTrailerOnTheBigCardFlag] = useState(false);
 
   const [trailersOnTheHeroHomepageFlag, setTrailersOnTheHeroHomepageFlag] =
@@ -33,9 +30,6 @@ const Main = () => {
     trailersOnTheHeroMovieAndShowPageFlag,
     setTrailersOnTheHeroMovieAndShowPageFlag,
   ] = useState(false);
-
-  const [saving, setSaveProcess] = useState(false);
-  const [successMessage, setSuccessMessage] = useState(false);
 
   const onSave = () => {
     const data = {
@@ -48,11 +42,8 @@ const Main = () => {
       [FULLSCREEN_MOVIE_AND_SHOW]: fullscreenMovieAndShowFlag,
     };
 
-    setSaveProcess(true);
-
     chrome.storage?.sync?.set(data).then(() => {
-      setSaveProcess(false);
-      setSuccessMessage(true);
+      
     });
   };
 
@@ -106,6 +97,7 @@ const Main = () => {
           setTrailersOnTheHeroMovieAndShowPageFlag={
             setTrailersOnTheHeroMovieAndShowPageFlag
           }
+          onChange={onSave}
         />
 
         <div className="h-16" />
@@ -113,30 +105,22 @@ const Main = () => {
         <FullScreen
           fullscreenMovieAndShowFlag={fullscreenMovieAndShowFlag}
           setFullscreenMovieAndShowFlag={setFullscreenMovieAndShowFlag}
+          onChange={onSave}
         />
       </div>
 
       <hr className="my-8 h-px bg-gray-200 border-0 dark:bg-gray-500" />
 
       <div className="flex justify-between">
-        <SaveBtn
-          label={t("SAVE")}
-          textLoading={t("SAVING")}
-          onClick={onSave}
-          loading={saving}
-        />
         <OutlineBtn
           color="red"
+          style={{
+            marginInlineStart: "auto"
+          }}
           label={t("REPORT_A_PROBLEM")}
           onClick={() => navigate("/options/index.html?page=report")}
         />
       </div>
-
-      <SuccessMessage
-        show={successMessage}
-        text={t("SUCCESSFULLY_SAVE")}
-        onClose={setSuccessMessage}
-      />
     </main>
   );
 };

@@ -2,10 +2,11 @@ import clsx from "clsx";
 import OutlineBtnProps from "./OutlineBtn.interface";
 
 const OutlineBtn = (props: OutlineBtnProps) => {
-  const { label, color, onClick } = props;
+  const { label, color, style, onClick } = props;
   return (
     <button
       type="button"
+      style={style}
       onClick={() => typeof onClick === "function" && onClick()}
       className={clsx(
         color === "red" &&
