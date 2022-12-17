@@ -5,12 +5,12 @@
     "OPTIONS": "خيارات",
 
     "TRAILERS": "المقطورات",
-    "SHOW_TRAILER_ON_THE_BIG_CARD": "عرض المقطع الدعائي على البطاقة الكبيرة.",
-    "SUGGESTION_TO_SHOW_TRAILERS_ON_THE_HERO_HEADER_ON_THE_HOME_PAGE":"اقتراح لإظهار المقطورات على رأس البطل على الصفحة الرئيسية.",
-    "SUGGESTION_TO_SHOW_TRAILER_ON_THE_HERO_HEADER_ON_THE_MOVIE_PAGE_AND_SHOW_PAGE": "اقتراح لإظهار المقطع الدعائي على رأس البطل على صفحة الفيلم وصفحة العرض.",
+    "SHOW_TRAILER_ON_THE_CARD": "عرض المقطع الدعائي على البطاقة.",
+    "SHOW_TRAILERS_AT_THE_TOP_OF_THE_PAGE_ON_THE_HOME_PAGE": "إظهار المقاطع الدعائية أعلى الصفحة في الصفحة الرئيسية.",
+    "SHOW_THE_TRAILER_AT_THE_TOP_OF_THE_MOVIE_PAGE": "اعرض المقطع الدعائي أعلى صفحة الفيلم.",
 
     "FULL_SCREEN": "شاشة كاملة",
-    "ENABLE_FULLSCREEN_WHEN_DOUBLE_CLICK_ON_A_MOVIE_OR_SHOW_SCREEN": "قم بتمكين وضع ملء الشاشة عند النقر المزدوج على فيلم أو شاشة عرض.",
+    "ENABLE_FULLSCREEN_WHEN_DOUBLE_CLICK_ON_A_MOVIE": "قم بتمكين وضع ملء الشاشة عند النقر المزدوج على الفيلم.",
 
     "SAVE": "حفظ",
     "SAVING": "حفظ...",

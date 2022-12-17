@@ -5,12 +5,12 @@
     "OPTIONS": "אפשרויות",
 
     "TRAILERS": "טריילרים",
-    "SHOW_TRAILER_ON_THE_BIG_CARD": "הצג טריילר על כרטיס גדול.",
-    "SUGGESTION_TO_SHOW_TRAILERS_ON_THE_HERO_HEADER_ON_THE_HOME_PAGE":"הצעה להציג טריילרים בכותרת הגיבור בעמוד הבית.",
-    "SUGGESTION_TO_SHOW_TRAILER_ON_THE_HERO_HEADER_ON_THE_MOVIE_PAGE_AND_SHOW_PAGE": "הצעה להציג טריילר בכותרת הגיבור בעמוד הסרט ובעמוד התוכנית.",
+    "SHOW_TRAILER_ON_THE_CARD": "הצגת טריילר על כרטיס.",
+    "SHOW_TRAILERS_AT_THE_TOP_OF_THE_PAGE_ON_THE_HOME_PAGE": "הצגת טריילרים בראש הדף בעמוד הבית.",
+    "SHOW_THE_TRAILER_AT_THE_TOP_OF_THE_MOVIE_PAGE": "הצגת טריילר בחלק העליון של עמוד הסרט.",
 
     "FULL_SCREEN": "מסך מלא",
-    "ENABLE_FULLSCREEN_WHEN_DOUBLE_CLICK_ON_A_MOVIE_OR_SHOW_SCREEN": "אפשר מסך מלא בלחיצה פעמיים על מסך הסרט או סדרה.",
+    "ENABLE_FULLSCREEN_WHEN_DOUBLE_CLICK_ON_A_MOVIE": "אפשר מסך מלא בלחיצה פעמיים על מסך הסרט.",
 
     "SAVE": "שמירה",
     "SAVING": "שומר...",

@@ -5,12 +5,12 @@
     "OPTIONS": "Options",
 
     "TRAILERS": "Trailers",
-    "SHOW_TRAILER_ON_THE_BIG_CARD": "Show Trailer on the big card.",
-    "SUGGESTION_TO_SHOW_TRAILERS_ON_THE_HERO_HEADER_ON_THE_HOME_PAGE":"Suggestion to show trailers on the hero header on the home page.",
-    "SUGGESTION_TO_SHOW_TRAILER_ON_THE_HERO_HEADER_ON_THE_MOVIE_PAGE_AND_SHOW_PAGE": "Suggestion to show trailer on the hero header on the movie page and show page.",
+    "SHOW_TRAILER_ON_THE_CARD": "Show Trailer on the card.",
+    "SHOW_TRAILERS_AT_THE_TOP_OF_THE_PAGE_ON_THE_HOME_PAGE": "Show trailers at the top of the page on the home page.",
+    "SHOW_THE_TRAILER_AT_THE_TOP_OF_THE_MOVIE_PAGE": "Show the trailer at the top of the movie page.",
 
     "FULL_SCREEN": "Full Screen",
-    "ENABLE_FULLSCREEN_WHEN_DOUBLE_CLICK_ON_A_MOVIE_OR_SHOW_SCREEN": "Enable fullscreen when double click on a movie or show screen.",
+    "ENABLE_FULLSCREEN_WHEN_DOUBLE_CLICK_ON_A_MOVIE": "Enable fullscreen when double click on a movie.",
 
     "SAVE": "Save",
     "SAVING": "Saving...",

@@ -18,7 +18,7 @@ const FullScreen = (props: Props) => {
       <h3 className="text-base font-bold dark:text-white">{t('FULL_SCREEN')}</h3>
 
       <Switch
-        label={t('ENABLE_FULLSCREEN_WHEN_DOUBLE_CLICK_ON_A_MOVIE_OR_SHOW_SCREEN')}
+        label={t('ENABLE_FULLSCREEN_WHEN_DOUBLE_CLICK_ON_A_MOVIE')}
         checked={fullscreenMovieAndShowFlag}
         onChange={setFullscreenMovieAndShowFlag}
         rtl={_isRtl}
