@@ -148,7 +148,7 @@ function translation() {
     document.getElementById("group-2-title").innerText = translate("SHOW_TRAILER_ON_CARD");
     document.getElementById("group-3-title").innerText = translate("DOUBLE_CLICK_FOR_FULL_SCREEN");
 
-    document.querySelector(".settings").setAttribute("title", translate("SETTINGS"));
+    document.getElementById("settings").setAttribute("title", translate("SETTINGS"));
 }
 
 function setDir() {
