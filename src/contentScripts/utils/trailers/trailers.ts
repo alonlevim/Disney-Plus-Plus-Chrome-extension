@@ -7,7 +7,7 @@ interface TrailersMap {
     [title: string]: Trailer
 }
 
-class Trailers {
+export class Trailers {
     private static _instance: Trailers;
     items: TrailersMap;
     private playingNow?: Youtube;

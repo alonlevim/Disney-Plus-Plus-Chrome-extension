@@ -3,6 +3,7 @@ import HomeInstance, { Home } from "./pages/home/home";
 import { Page } from "./pages/page.interface";
 import { HOME, MOVIES, ON_BOARDING, ON_BOARDING_PROFILE, SHOWS } from "./pages/pagesConstants";
 import getPageAndCountry from "./utils/getPageAndCountry";
+import trailersInstance, { Trailers } from "./utils/trailers/trailers";
 
 export class Router {
     private static _instance: Router;
@@ -12,11 +13,13 @@ export class Router {
     private moviesAndShows: MoviesAndShows;
     private home: Home;
     private pages: Page[];
+    private trailers: Trailers;
 
     private constructor() {
         // init pages
         this.moviesAndShows = MoviesAndShowsInstance();
         this.home = HomeInstance();
+        this.trailers = trailersInstance();
 
         this.pages = [
             this.moviesAndShows,
@@ -36,6 +39,7 @@ export class Router {
 
         if (url !== this.currentUrl) {
             this.currentUrl = url;
+            this.trailers.getPlayingNow()?.destroyIframe();
             this.update();
         }
     };
