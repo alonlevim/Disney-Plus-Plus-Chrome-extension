@@ -128,6 +128,10 @@ class Youtube {
             this.iframe.parentNode.removeChild(this.iframe);
             log("destroyed iframe");
         }
+
+        if( typeof this._onEnd === "function" ) {
+            this._onEnd(this);
+        }
         
         this.playStatus = null;
         this.listening = false;
