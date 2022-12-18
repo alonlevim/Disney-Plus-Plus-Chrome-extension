@@ -11,6 +11,7 @@ import {
     ON_START_TRAILER
 } from "./promotionHeader.animation";
 import { HeroList } from "./heroHomePage.interface";
+import rulesInstance from "../../../rules";
 
 const PROMOTION_IMAGE_PATH = "._1grSXqPibJda0muajkRKkU";
 const PROMOTION_ACTIONS_PATH = "._3WOPDH3uV90WJTM6_qrL6J";
@@ -21,6 +22,8 @@ class HeroHomePage extends HeroClass {
 
     private lastTitle = "null";
     private list: HeroList;
+    private rules = rulesInstance();
+    private initialized = false;
 
     private constructor() {
         super();
@@ -29,6 +32,23 @@ class HeroHomePage extends HeroClass {
 
     public static get Instance(): HeroHomePage {
         return this._instance || (this._instance = new this());
+    }
+
+    public init(): void {
+        if (this.initialized) {
+            return;
+        }
+
+        this.initialized = true;
+
+        super.init();
+        this.rules.runAfterInit(() => {
+            if (!this.initialized) {
+                this.init();
+            } else {
+                this.update();
+            }
+        });
     }
 
     public update(): void {
@@ -214,15 +234,19 @@ class HeroHomePage extends HeroClass {
     }
 
     protected fixMissingBtn(): void {
-        if (!this.currentItem?.addedBtn || this.currentItem?.fixedMissingBtn) {
+        if (!this.currentItem?.addedBtn) {
             return;
         }
 
         const btnElementAtDom = document.querySelector(`.${MY_CUSTOM_CLASS_NAME}`);
         if (!btnElementAtDom) {
             this.currentItem.addedBtn = false;
-            this.currentItem.fixedMissingBtn = true;
         }
+    }
+
+    public dispose(): void {
+        this.initialized = false;
+        super.dispose();
     }
 }
 
