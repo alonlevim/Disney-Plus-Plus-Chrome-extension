@@ -3,4 +3,4 @@ version="$(cat public/manifest.json | grep \"version\" | sed 's/\"version\": \"/
 npm run build:all
 
 # # create zip
-zip -r -D "releases/$version.zip" dist/* --exclude \*.map\*
+zip -r -D "releases/$version.zip" dist/* --exclude \*.map\* --exclude \*.txt\*
