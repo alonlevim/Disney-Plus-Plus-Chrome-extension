@@ -6,6 +6,7 @@ import { BEFORE_TRAILER_START, ON_END_TRAILER, ON_START_TRAILER } from "../../ut
 import Youtube from "../../utils/youtube/youtube";
 
 const BIG_CARD_CLASS = "hover-card";
+const BIG_CARD_TITLE_CLASS = "_3noPaNO8juXMMqwSlyfSpM";
 
 class BigCard {
     private static _instance: BigCard;
@@ -173,6 +174,12 @@ class BigCard {
         }
         
         this.waitCursor(card, false);
+
+        // Keep title image on top while playing trailer
+        const titleElement = document.querySelector(`.${BIG_CARD_CLASS} .${BIG_CARD_TITLE_CLASS}`);
+        if( titleElement ) {
+            titleElement.setAttribute("style", `${titleElement.getAttribute("style") ?? ""} z-index: 10;`.trim());
+        }
 
         if( youtube.iframe ) {
             youtube.iframe.setAttribute(
