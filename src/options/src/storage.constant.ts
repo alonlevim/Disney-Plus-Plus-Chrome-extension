@@ -8,3 +8,5 @@ export const TRAILER_ON_THE_HERO_MOVIE_AND_SHOW_PAGE =
 export const FULLSCREEN_MOVIE_AND_SHOW = "fullscreen-movie-and-show";
 
 export const LANGUAGE = "language";
+export const FIRST_INSTALL_DATE = "first-install-date";
+export const FIRST_INSTALL_VERSION = "first-install-version";
