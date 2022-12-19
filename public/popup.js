@@ -7,7 +7,7 @@ const configPreview = {
 const LANGUAGE = "language";
 
 let lang = "en";
-let current = -1;
+let current = 0;
 let interval;
 
 function init() {
@@ -15,9 +15,7 @@ function init() {
     setDir();
     clearVal();
 
-    if( document.getElementsByClassName("group")?.[0] ) {
-        document.getElementsByClassName("group")[0].className += " active";
-    }
+    moveToPreview(current);
 
     const dots = getDots();
     for( const dot of dots ) {
