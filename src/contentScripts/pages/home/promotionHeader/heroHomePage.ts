@@ -12,6 +12,7 @@ import {
 } from "./promotionHeader.animation";
 import { HeroList } from "./heroHomePage.interface";
 import rulesInstance from "../../../rules";
+import { TRAILERS_ON_THE_HERO_HOMEPAGE } from "../../../../storage.constant";
 
 const PROMOTION_IMAGE_PATH = "._1grSXqPibJda0muajkRKkU";
 const PROMOTION_ACTIONS_PATH = "._3WOPDH3uV90WJTM6_qrL6J";
@@ -43,6 +44,10 @@ class HeroHomePage extends HeroClass {
 
         super.init();
         this.rules.runAfterInit(() => {
+            if( !this.rules.isTheRuleValid(TRAILERS_ON_THE_HERO_HOMEPAGE) ) {
+                return;
+            }
+            
             if (!this.initialized) {
                 this.init();
             } else {
