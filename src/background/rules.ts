@@ -21,7 +21,7 @@ export class Rules {
 
     public getRules = async (): Promise<ActionsRules> => (
         new Promise((resolve, reject) => {
-            chrome.storage.sync.get([
+            chrome.storage.local.get([
                 TRAILER_ON_THE_BIG_CARD,
                 TRAILERS_ON_THE_HERO_HOMEPAGE,
                 TRAILER_ON_THE_HERO_MOVIE_AND_SHOW_PAGE,

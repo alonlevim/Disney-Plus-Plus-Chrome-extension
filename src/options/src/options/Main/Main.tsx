@@ -42,13 +42,13 @@ const Main = () => {
       [FULLSCREEN_MOVIE_AND_SHOW]: fullscreenMovieAndShowFlag,
     };
 
-    chrome.storage?.sync?.set(data).then(() => {
+    chrome.storage?.local?.set(data).then(() => {
       
     });
   };
 
   useLayoutEffect(() => {
-    chrome.storage?.sync
+    chrome.storage?.local
       ?.get([
         TRAILER_ON_THE_BIG_CARD,
         TRAILERS_ON_THE_HERO_HOMEPAGE,
