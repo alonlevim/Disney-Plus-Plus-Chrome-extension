@@ -57,7 +57,7 @@ class Youtube {
 
     private initAfterLoad = () => {
         // Send: add onStateChange to event listener
-        this.iframe.contentWindow.postMessage(
+        this.iframe?.contentWindow.postMessage(
             '{"event":"command","func":"addEventListener","args":["onStateChange"]}',
             "https://www.youtube.com"
         );
@@ -69,7 +69,7 @@ class Youtube {
         this.trailers.setPlayingNow(this);
 
         // Send: play
-        this.iframe.contentWindow.postMessage(
+        this.iframe?.contentWindow.postMessage(
             '{"event":"command","func":"playVideo","args":[],"id":1,"channel":"widget"}',
             "https://www.youtube.com"
         );
@@ -79,7 +79,7 @@ class Youtube {
 
             setTimeout(() => {
                 // send command
-                this.iframe.contentWindow.postMessage(
+                this.iframe?.contentWindow.postMessage(
                     '{"event":"listening","id":1,"channel":"widget"}',
                     "https://www.youtube.com"
                 );
