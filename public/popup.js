@@ -5,6 +5,8 @@ const configPreview = {
 };
 
 const LANGUAGE = "language";
+const GET_LOGO_URL = "get-logo-url";
+const RESPONSE_ON_LOGO_URL = "response-on-logo-url";
 
 let lang = "en";
 let current = 0;
@@ -14,6 +16,7 @@ function init() {
     translation();
     setDir();
     clearVal();
+    askingLogoUrl();
 
     moveToPreview(current);
 
@@ -154,6 +157,37 @@ function setDir() {
         document.body.setAttribute("dir", dir[lang]);
     }
 }
+
+function askingLogoUrl () {
+    // eslint-disable-next-line no-undef
+    chrome?.runtime?.sendMessage({ message: GET_LOGO_URL });
+}
+
+function onMessage() {
+    // eslint-disable-next-line no-undef
+    chrome?.runtime?.onMessage?.addListener((data) => {
+        switch( data.message ) {
+            case RESPONSE_ON_LOGO_URL:
+                if( data?.url ) {
+                    getLogo(data.url);
+                }
+                break;
+        }
+    });
+}
+
+async function getLogo(url) {
+    const img = new Image();
+    img.src = url;
+    img.setAttribute('style', 'visibility: hidden; position: absolute;z-index: -1; user-select: none;');
+
+    img.onload = () => {
+        document.body.appendChild(img);
+    };
+}
+
+// Initialize
+onMessage();
 
 // eslint-disable-next-line no-undef
 chrome?.storage?.sync?.get([LANGUAGE])

@@ -18,3 +18,9 @@ export const SEND_REPORT_FROM_OPTIONS = "send-report";
 
 // send to options
 export const RESPONSE_ON_REPORT_TO_OPTIONS = "response-on-report";
+
+// get from popup
+export const ASKING_FOR_LOGO_URL = "get-logo-url";
+
+// send to popup
+export const RESPONSE_ON_LOGO_URL = "response-on-logo-url";
