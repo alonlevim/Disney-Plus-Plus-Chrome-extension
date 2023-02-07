@@ -73,8 +73,11 @@ class HeroMoviesAndShows extends HeroClass {
 
     protected addBtn(item: HeroItem): void {
         try {
-            // fix style
-            document.querySelector(PROMOTION_ACTIONS_PATH).setAttribute('style', 'flex-wrap: nowrap;')
+            // Check if there is not a Resume btn
+            if( !document.querySelector(PROMOTION_ACTIONS_PATH)?.querySelector("._327SC61OuWTrcvPRkh7SJP.Bhnxu6dfnJDV6gSBMtJMI") ) {
+                // fix style
+                document.querySelector(PROMOTION_ACTIONS_PATH).setAttribute('style', 'flex-wrap: nowrap;')
+            }
 
             let level_5_span = document.createElement("span");
             level_5_span = this.changeTextOnButton(item, level_5_span);
