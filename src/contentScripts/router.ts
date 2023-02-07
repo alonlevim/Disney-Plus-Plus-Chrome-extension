@@ -1,7 +1,21 @@
 import MoviesAndShowsInstance, { MoviesAndShows } from "./pages/moviesAndShows/moviesAndShows";
 import HomeInstance, { Home } from "./pages/home/home";
+import StudioInstance, { Studio } from "./pages/studio/studio";
 import { Page } from "./pages/page.interface";
-import { HOME, MOVIES, ON_BOARDING, ON_BOARDING_PROFILE, SHOWS } from "./pages/pagesConstants";
+import {
+    HOME,
+    MOVIES,
+    ON_BOARDING,
+    ON_BOARDING_PROFILE,
+    SHOWS,
+    STUDIO,
+    STUDIO_DISNEY,
+    STUDIO_MARVEL,
+    STUDIO_NAT_GEO,
+    STUDIO_PIXAR,
+    STUDIO_STAR,
+    STUDIO_STAR_WARS
+} from "./pages/pagesConstants";
 import getPageAndCountry from "./utils/getPageAndCountry";
 import trailersInstance, { Trailers } from "./utils/trailers/trailers";
 
@@ -12,6 +26,7 @@ export class Router {
     // Pages
     private moviesAndShows: MoviesAndShows;
     private home: Home;
+    private studio: Studio;
     private pages: Page[];
     private trailers: Trailers;
 
@@ -20,10 +35,12 @@ export class Router {
         this.moviesAndShows = MoviesAndShowsInstance();
         this.home = HomeInstance();
         this.trailers = trailersInstance();
+        this.studio = StudioInstance();
 
         this.pages = [
             this.moviesAndShows,
-            this.home
+            this.home,
+            this.studio
         ];
 
         // update router
@@ -46,7 +63,6 @@ export class Router {
 
     private update(): void {
         const pageAndCountry = getPageAndCountry();
-
         // Dispose
         this.disposePages();
 
@@ -60,6 +76,16 @@ export class Router {
             case MOVIES:
             case SHOWS:
                 this.moviesAndShows.init();
+                break;
+            case STUDIO:
+                if ([STUDIO_PIXAR,
+                    STUDIO_DISNEY,
+                    STUDIO_MARVEL,
+                    STUDIO_STAR_WARS,
+                    STUDIO_NAT_GEO,
+                    STUDIO_STAR].includes(pageAndCountry.studio)) {
+                    this.studio.init();
+                }
                 break;
         }
     }
