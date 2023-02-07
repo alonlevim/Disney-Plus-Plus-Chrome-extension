@@ -10,7 +10,7 @@ This extension improves user experience and adds trailers for those who are watc
 
 ## Production
 
-[Link in webstore](https://chrome.google.com/webstore/detail/disney-plus-plus/kclkgabmccnlojaaopdbpbplkpmjfobh)
+[Link to Webstore](https://chrome.google.com/webstore/detail/disney-plus-plus/kclkgabmccnlojaaopdbpbplkpmjfobh)
 
 
 ## Init
