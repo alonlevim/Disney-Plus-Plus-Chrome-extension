@@ -18,7 +18,7 @@ const PROMOTION_IMAGE_PATH = "._1grSXqPibJda0muajkRKkU";
 const PROMOTION_ACTIONS_PATH = "._3WOPDH3uV90WJTM6_qrL6J";
 const MY_CUSTOM_CLASS_NAME = "_h5HKCc9DKsS8pFFm";
 
-const PROMOTION_IMAGE_PATH_2 = "img.ContentTitle__titleImage__1RlJJ";
+const PROMOTION_IMAGE_PATH_2 = "img.masthead-container__heroImage__2Jnc_";
 const PROMOTION_ACTIONS_PATH_2 = ".masthead-content-info-base__buttonsContainer__k-G1Q";
 
 class HeroHomePage extends HeroClass {
@@ -157,7 +157,7 @@ class HeroHomePage extends HeroClass {
             return null;
         }
     }
-
+    
     protected addBtn(item: HeroItem): void {
         try {
             let level_5_span = document.createElement("span");
@@ -217,7 +217,7 @@ class HeroHomePage extends HeroClass {
         }
 
         try {
-            const bigImage = document.querySelector("._1grSXqPibJda0muajkRKkU");
+            const bigImage = document.querySelector(PROMOTION_IMAGE_PATH) ?? document.querySelector(PROMOTION_IMAGE_PATH_2);
             if (bigImage) {
                 // hide iframe
                 this.currentItem.youtube.getIframe().setAttribute('style', BEFORE_TRAILER_START)
