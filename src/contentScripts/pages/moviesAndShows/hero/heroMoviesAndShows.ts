@@ -15,6 +15,9 @@ const PROMOTION_ACTIONS_PATH = ".IvJal0TgDhB6zMOH9Jtf_";
 const VIDEO_HEIGHT_PATH_SHOULD_BE = "._3AROLDGB01fCnKsXTMjaM2";
 const MY_CUSTOM_CLASS_NAME = "_h5HKCc9DKsS8pFFm";
 
+const HERO_IMAGE_PATH_2 = ".details-hero-base__heroImage__oAQ4W";
+const PROMOTION_ACTIONS_PATH_2 = ".details-hero-gec__buttonsContainer__2oZq9";
+
 class HeroMoviesAndShows extends HeroClass {
     private static _instance: HeroMoviesAndShows;
 
@@ -48,7 +51,7 @@ class HeroMoviesAndShows extends HeroClass {
 
     protected getTitle(): string {
         try {
-            return document.querySelector(HERO_IMAGE_PATH)?.getAttribute("alt");
+            return document.querySelector(HERO_IMAGE_PATH)?.getAttribute("alt") ?? document.querySelector(HERO_IMAGE_PATH_2)?.getAttribute("alt");
         } catch (error) {
             return null;
         }
@@ -74,24 +77,24 @@ class HeroMoviesAndShows extends HeroClass {
     protected addBtn(item: HeroItem): void {
         try {
             // Check if there is not a Resume btn
-            if( !document.querySelector(PROMOTION_ACTIONS_PATH)?.querySelector("._327SC61OuWTrcvPRkh7SJP.Bhnxu6dfnJDV6gSBMtJMI") ) {
+            if( !document.querySelector(PROMOTION_ACTIONS_PATH)?.querySelector("._327SC61OuWTrcvPRkh7SJP.Bhnxu6dfnJDV6gSBMtJMI") && !document.querySelector(PROMOTION_ACTIONS_PATH_2)?.querySelector(".base-button__button__3qwNY") ) {
                 // fix style
-                document.querySelector(PROMOTION_ACTIONS_PATH).setAttribute('style', 'flex-wrap: nowrap;')
+                document.querySelector(PROMOTION_ACTIONS_PATH)?.setAttribute('style', 'flex-wrap: nowrap;')
+                document.querySelector(PROMOTION_ACTIONS_PATH_2)?.setAttribute('style', 'flex-wrap: nowrap;')
             }
 
             let level_5_span = document.createElement("span");
             level_5_span = this.changeTextOnButton(item, level_5_span);
-            // level_5_span.innerText = "Test";
             item.btnUI.level_5 = level_5_span;
 
             const level_4_btn = document.createElement("button");
-            level_4_btn.className = "_1CSTLo7uotP5mTlp3jKun7 _1yQBhzj75P25n0B6DFF3aA";
+            level_4_btn.className = "_1CSTLo7uotP5mTlp3jKun7 _1yQBhzj75P25n0B6DFF3aA base-button__button__3qwNY base-button__btnIcon__2NkgH";
             level_4_btn.addEventListener('click', this.onClickTrailer);
             level_4_btn.appendChild(level_5_span);
             item.btnUI.level_4 = level_4_btn;
 
             const level_3_span = document.createElement("span");
-            level_3_span.className = "_2DhaMd4Yatz-PmNIfTTl2L";
+            level_3_span.className = "_2DhaMd4Yatz-PmNIfTTl2L button-watchlist__watchlistBtn__3trHT";
             level_3_span.appendChild(level_4_btn);
             item.btnUI.level_3 = level_3_span;
 
@@ -105,7 +108,8 @@ class HeroMoviesAndShows extends HeroClass {
             level_1_div.appendChild(level_2_div);
             item.btnUI.level_1 = level_1_div;
 
-            document.querySelector(PROMOTION_ACTIONS_PATH).appendChild(level_1_div);
+            document.querySelector(PROMOTION_ACTIONS_PATH)?.appendChild(level_1_div);
+            document.querySelector(PROMOTION_ACTIONS_PATH_2)?.appendChild(level_1_div);
 
             this.currentItem.addedBtn = true;
         } catch (error) {
@@ -128,7 +132,7 @@ class HeroMoviesAndShows extends HeroClass {
         }
 
         try {
-            const bigImage = document.querySelector(HERO_IMAGE_PATH);
+            const bigImage = document.querySelector(HERO_IMAGE_PATH) ?? document.querySelector(HERO_IMAGE_PATH_2);
             if (bigImage) {
                 const height = this.getVideoHeightShouldBe() ?? "100%";
                 this.currentVideoHeight = height;
