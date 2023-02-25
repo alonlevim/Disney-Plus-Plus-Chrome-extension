@@ -50,8 +50,9 @@ export const sendRequestToServer = async (
 export const askingForTrailer = (
     data: {
         title: string;
-        lang?: Languages,
+        lang?: Languages;
         itemId?: string;
+        target: string;
     },
     tabId: number
 ) => {
@@ -66,7 +67,8 @@ export const askingForTrailer = (
         {
             title: data.title,
             itemId: data.itemId,
-            lang: data?.lang
+            lang: data?.lang,
+            target: data.target,
         },
         (res: any) => {
             const data = (

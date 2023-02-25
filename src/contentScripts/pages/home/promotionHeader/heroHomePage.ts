@@ -21,6 +21,8 @@ const MY_CUSTOM_CLASS_NAME = "_h5HKCc9DKsS8pFFm";
 const PROMOTION_IMAGE_PATH_2 = "img.masthead-container__heroImage__2Jnc_";
 const PROMOTION_ACTIONS_PATH_2 = ".masthead-content-info-base__buttonsContainer__k-G1Q";
 
+const TARGET = "hero-home";
+
 class HeroHomePage extends HeroClass {
     private static _instance: HeroHomePage;
 
@@ -107,7 +109,7 @@ class HeroHomePage extends HeroClass {
             const itemId = this.getItemId();
 
             // get video
-            this.trailers.askForTrailer(title, itemId)
+            this.trailers.askForTrailer(title, TARGET, itemId)
                 .then((youtube) => {
                     this.list[title].youtube = youtube;
                     this.list[title].loading = false;
@@ -157,7 +159,7 @@ class HeroHomePage extends HeroClass {
             return null;
         }
     }
-    
+
     protected addBtn(item: HeroItem): void {
         try {
             let level_5_span = document.createElement("span");

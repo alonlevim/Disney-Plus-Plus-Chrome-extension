@@ -21,7 +21,7 @@ abstract class HeroClass implements HeroInterface {
 
     protected abstract getItemId(): string;
 
-    protected handleTitle(title: string): void {
+    protected handleTitle(title: string, target: string): void {
         if (typeof this.currentItem === "undefined") {
             // new title
             this.currentItem = {
@@ -35,7 +35,7 @@ abstract class HeroClass implements HeroInterface {
             const itemId = this.getItemId();
 
             // get video
-            this.trailers.askForTrailer(title, itemId)
+            this.trailers.askForTrailer(title, target, itemId)
                 .then((youtube: Youtube) => {
                     this.currentItem.youtube = youtube;
                     this.currentItem.loading = false;

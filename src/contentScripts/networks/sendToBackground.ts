@@ -24,13 +24,14 @@ const lang = (): Languages => ({
     rtl: isRtl()
 })
 
-export const askingForTrailer = (title: string, itemId: string): void => {
+export const askingForTrailer = (title: string, itemId: string, target: string): void => {
     try {
         if (title) {
             chrome.runtime.sendMessage({
                 message: ASKING_FOR_TRAILER,
                 title,
                 itemId,
+                target,
                 lang: lang()
             });
         }

@@ -8,6 +8,8 @@ import Youtube from "../../utils/youtube/youtube";
 const BIG_CARD_CLASS = "hover-card";
 const BIG_CARD_TITLE_CLASS = "_3noPaNO8juXMMqwSlyfSpM";
 
+const TARGET = "big-card";
+
 class BigCard {
     private static _instance: BigCard;
 
@@ -47,12 +49,12 @@ class BigCard {
 
                 this.currentTitle = title;
 
-                this.handleOpen(card, title);
+                this.handleOpen(card, title, TARGET);
             }
         }
     }
 
-    private handleOpen = (card: HTMLDivElement, title: string): void => {
+    private handleOpen = (card: HTMLDivElement, title: string, target: string): void => {
         log('open:', title);
         this._isOpen = true;
         this.watching = true;
@@ -64,6 +66,7 @@ class BigCard {
         this.trailers.askForTrailerAutoPlay(
             title,
             itemId,
+            target,
             this.handleShow,
             this.handleEnd
             )

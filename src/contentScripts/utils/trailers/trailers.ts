@@ -31,13 +31,14 @@ export class Trailers {
 
     public askForTrailer(
         title: string,
+        target: string,
         itemId?: string,
         ): Promise<Youtube> {
         return new Promise((resolve, reject) => {
             // exists
             if( typeof this.items[title] !== "undefined" ) {
                 // create again iframe
-                this.items[title].youtube.createIframe();
+                this.items[title].youtube?.createIframe();
 
                 return resolve(this.items[title].youtube);
             }
@@ -46,13 +47,14 @@ export class Trailers {
             this.items[title] = new Trailer(title, resolve, reject);
 
             // send to server
-            askingForTrailer(title, itemId);
+            askingForTrailer(title, itemId, target);
         });
     }
 
     public askForTrailerAutoPlay(
         title: string,
         itemId: string,
+        target: string,
         onStartPlaying: (youtube: Youtube) => void,
         onEndPlaying: (youtube: Youtube) => void
         ): Promise<Youtube> {
@@ -62,7 +64,7 @@ export class Trailers {
                 // set callbacks
                 this.items[title].youtube.initCallbacks(onStartPlaying, onEndPlaying);
                 // create again iframe
-                this.items[title].youtube.createIframe();
+                this.items[title].youtube?.createIframe();
 
                 return resolve(this.items[title].youtube);
             }
@@ -72,7 +74,7 @@ export class Trailers {
             this.items[title].initAutoPlayCallbacks(onStartPlaying, onEndPlaying);
 
             // send to server
-            askingForTrailer(title, itemId);
+            askingForTrailer(title, itemId, target);
         });
     }
 

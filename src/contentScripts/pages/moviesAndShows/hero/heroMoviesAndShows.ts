@@ -18,6 +18,8 @@ const MY_CUSTOM_CLASS_NAME = "_h5HKCc9DKsS8pFFm";
 const HERO_IMAGE_PATH_2 = ".details-hero-base__heroImage__oAQ4W";
 const PROMOTION_ACTIONS_PATH_2 = ".details-hero-gec__buttonsContainer__2oZq9";
 
+const TARGET = "hero-movies-and-shows";
+
 class HeroMoviesAndShows extends HeroClass {
     private static _instance: HeroMoviesAndShows;
 
@@ -45,7 +47,7 @@ class HeroMoviesAndShows extends HeroClass {
         const title = this.getTitle();
 
         if (title) {
-            this.handleTitle(title);
+            this.handleTitle(title, TARGET);
         }
     }
 

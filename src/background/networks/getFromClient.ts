@@ -33,7 +33,8 @@ export class GetFromClient {
                             {
                                 title: message.title,
                                 lang: message?.lang,
-                                itemId: message.itemId
+                                itemId: message.itemId,
+                                target: message.target,
                             },
                             sender.tab.id,
                         );
