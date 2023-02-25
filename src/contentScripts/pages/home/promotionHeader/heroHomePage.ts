@@ -18,6 +18,9 @@ const PROMOTION_IMAGE_PATH = "._1grSXqPibJda0muajkRKkU";
 const PROMOTION_ACTIONS_PATH = "._3WOPDH3uV90WJTM6_qrL6J";
 const MY_CUSTOM_CLASS_NAME = "_h5HKCc9DKsS8pFFm";
 
+const PROMOTION_IMAGE_PATH_2 = "img.ContentTitle__titleImage__1RlJJ";
+const PROMOTION_ACTIONS_PATH_2 = ".masthead-content-info-base__buttonsContainer__k-G1Q";
+
 class HeroHomePage extends HeroClass {
     private static _instance: HeroHomePage;
 
@@ -65,13 +68,27 @@ class HeroHomePage extends HeroClass {
 
         const title = this.getTitle();
 
-        // There is a change
-        if (this.lastTitle !== title) {
-            this.lastTitle = title;
-            this.cleanPreItem();
+        if( !title ) {
+            this.getTitleAsync().then((title) => {
+                // There is a change
+                if (this.lastTitle !== title) {
+                    this.lastTitle = title;
+                    this.cleanPreItem();
 
-            if (title) {
-                this.handleTitle(title);
+                    if (title) {
+                        this.handleTitle(title);
+                    }
+                }
+            });
+        } else {
+            // There is a change
+            if (this.lastTitle !== title) {
+                this.lastTitle = title;
+                this.cleanPreItem();
+
+                if (title) {
+                    this.handleTitle(title);
+                }
             }
         }
     }
@@ -109,7 +126,19 @@ class HeroHomePage extends HeroClass {
 
     protected getTitle(): string {
         try {
-            return document.querySelector(PROMOTION_IMAGE_PATH)?.getAttribute("alt");
+            return document.querySelector(PROMOTION_IMAGE_PATH)?.getAttribute("alt") ?? document.querySelector(PROMOTION_IMAGE_PATH_2)?.getAttribute("alt");
+        } catch (error) {
+            return null;
+        }
+    }
+
+    private async getTitleAsync(): Promise<string> {
+        try {
+            return await (new Promise((resolve) => {
+                setTimeout(() => {
+                    return resolve(document.querySelector(PROMOTION_IMAGE_PATH)?.getAttribute("alt") ?? document.querySelector(PROMOTION_IMAGE_PATH_2)?.getAttribute("alt"));
+                }, 250);
+            }));
         } catch (error) {
             return null;
         }
@@ -117,7 +146,10 @@ class HeroHomePage extends HeroClass {
 
     protected getItemId(): string {
         try {
-            const element = document.querySelector(PROMOTION_ACTIONS_PATH).firstChild as Element;
+            let element = document.querySelector(PROMOTION_ACTIONS_PATH).firstChild as Element;
+            if( !element ) {
+                element = document.querySelector(PROMOTION_ACTIONS_PATH_2).firstChild as Element;
+            }
             const href = element.querySelector("a").getAttribute("href");
 
             return fromUrlToItemId(href);
@@ -133,7 +165,7 @@ class HeroHomePage extends HeroClass {
             item.btnUI.level_5 = level_5_span;
 
             const level_4_btn = document.createElement("button");
-            level_4_btn.className = "_1CSTLo7uotP5mTlp3jKun7 _1yQBhzj75P25n0B6DFF3aA";
+            level_4_btn.className = "_1CSTLo7uotP5mTlp3jKun7 _1yQBhzj75P25n0B6DFF3aA base-button__button__3qwNY base-button__btnIcon__2NkgH";
             level_4_btn.addEventListener('click', this.onClickTrailer);
             level_4_btn.appendChild(level_5_span);
             item.btnUI.level_4 = level_4_btn;
@@ -144,7 +176,7 @@ class HeroHomePage extends HeroClass {
             item.btnUI.level_3 = level_3_span;
 
             const level_2_div = document.createElement("div");
-            level_2_div.className = "_3MtbKw24KXDEXTonDsGxtK flex-grow-0 h-full";
+            level_2_div.className = "_3MtbKw24KXDEXTonDsGxtK flex-grow-0 h-full button-translucent__translucentBtn__ET-Ie";
             level_2_div.appendChild(level_3_span);
             item.btnUI.level_2 = level_2_div;
 
@@ -153,7 +185,8 @@ class HeroHomePage extends HeroClass {
             level_1_div.appendChild(level_2_div);
             item.btnUI.level_1 = level_1_div;
 
-            document.querySelector(PROMOTION_ACTIONS_PATH).appendChild(level_1_div);
+            document.querySelector(PROMOTION_ACTIONS_PATH)?.appendChild(level_1_div);
+            document.querySelector(PROMOTION_ACTIONS_PATH_2)?.appendChild(level_1_div);
 
             this.list[item.title].addedBtn = true;
         } catch (error) {
