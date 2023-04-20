@@ -1,12 +1,14 @@
 import MoviesAndShowsInstance, { MoviesAndShows } from "./pages/moviesAndShows/moviesAndShows";
 import HomeInstance, { Home } from "./pages/home/home";
 import StudioInstance, { Studio } from "./pages/studio/studio";
+import OriginalsInstance, { Originals } from "./pages/originals/originals";
 import { Page } from "./pages/page.interface";
 import {
     HOME,
     MOVIES,
     ON_BOARDING,
     ON_BOARDING_PROFILE,
+    ORIGINALS,
     SHOWS,
     STUDIO,
     STUDIO_DISNEY,
@@ -29,6 +31,7 @@ export class Router {
     private studio: Studio;
     private pages: Page[];
     private trailers: Trailers;
+    private originals: Originals;
 
     private constructor() {
         // init pages
@@ -36,11 +39,13 @@ export class Router {
         this.home = HomeInstance();
         this.trailers = trailersInstance();
         this.studio = StudioInstance();
+        this.originals = OriginalsInstance();
 
         this.pages = [
             this.moviesAndShows,
             this.home,
-            this.studio
+            this.studio,
+            this.originals
         ];
 
         // update router
@@ -76,6 +81,9 @@ export class Router {
             case MOVIES:
             case SHOWS:
                 this.moviesAndShows.init();
+                break;
+            case ORIGINALS:
+                this.originals.init();
                 break;
             case STUDIO:
                 if ([STUDIO_PIXAR,

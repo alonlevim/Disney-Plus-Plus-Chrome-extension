@@ -11,3 +11,4 @@ export const STUDIO_MARVEL = "marvel";
 export const STUDIO_STAR_WARS = "star_wars";
 export const STUDIO_NAT_GEO = "nat_geo";
 export const STUDIO_STAR = "star";
+export const ORIGINALS = "originals";
