@@ -22,9 +22,6 @@ export const sendRequestToServer = async (
 
     fetch(SERVER_URL + action, {
         method: "POST",
-        headers: {
-            'Content-Type': 'application/json;charset=UTF-8',
-        },
         body: JSON.stringify(data)
     })
         .then(res => res.json())
